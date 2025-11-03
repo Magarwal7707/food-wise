@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Wise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#008B84">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" type="image/png">
+  <style>
+    :root {
+      --page-bg: #F6F8F9;
+      --card: #fff;
+      --teal: #008B84;
+      --teal-dark: #006F6A;
+      --sand: #D98236;
+      --sand-dark: #C46D28;
+      --text-dark: #222;
+      --text-light: #666;
+      --border: #E0E0E0;
+      --shadow: 0 8px 24px rgba(0,0,0,.08);
+      --radius: 18px;
+      --transition: .25s cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;}
+    html,body{margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior:smooth;
+      transition: background var(--transition), color var(--transition);
+    }
+    header {
+      background: var(--teal);
+      color: #fff;
+      padding: 2.2rem 1rem 1.5rem;
+      text-align: center;
+      position: relative;
+      user-select: none;
+      box-shadow: var(--shadow);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    #logo {
+      font-size: clamp(2.3rem,6vw,3.3rem);
+      letter-spacing: 1px;
+      font-weight: 900;
+      text-shadow: 1px 2px 0 #006F6A33;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.2rem;
+      cursor: pointer;
+      margin-left: 1rem;
+      transition: color var(--transition);
+    }
+    .theme-toggle:active {color: #FFE477;}
+    #impactBar {
+      margin-top: .9rem;
+      font-size: 1.16rem;
+      letter-spacing: .5px;
+      font-weight: 600;
+    }
+    #impactBar span { color: #FFE477; }
+
+    .hero {
+      width: 100%;
+      height: 31vh;
+      min-height: 175px;
+      background: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: clamp(1.25rem,4vw,2.1rem);
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      border-radius: 0 0 32px 32px;
+      margin-bottom: 2.5rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.39);
+      border-radius: 0 0 32px 32px;
+    }
+    .hero span { position:relative; z-index: 2; font-weight: 600; }
+
+    .container { padding: 0 2vw; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(290px,1fr));
+      gap: 2.4rem 2rem;
+      max-width: 1150px;
+      margin: 0 auto 2.5rem;
+      align-items: stretch;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.6rem 2.1rem 2.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      border: 1.5px solid var(--border);
+      min-height: 240px;
+      transition: box-shadow var(--transition), transform var(--transition);
+      position: relative;
+    }
+    .card:hover, .card:focus-within {
+      box-shadow: 0 12px 28px rgba(0,0,0,.18);
+      transform: translateY(-7px) scale(1.01);
+      z-index: 2;
+    }
+    .card h3 {
+      margin: 0 0 .8rem;
+      color: var(--teal);
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+    .card p {
+      color: var(--text-light);
+      font-size: 1.08rem;
+      flex: 1;
+    }
+    .card button {
+      margin-top: auto;
+      border: none;
+      border-radius: 40px;
+      padding: 1rem 1.8rem;
+      background: var(--sand);
+      color: #fff;
+      font-size: 1.09rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 10px #ffd79024;
+      transition: background var(--transition), transform var(--transition);
+      outline-offset:2px;
+    }
+    .card button:hover, .card button:focus {
+      background: var(--sand-dark);
+      transform: scale(1.035);
+      outline: 2px solid var(--teal);
+    }
+    footer {
+      text-align: center;
+      padding: 2.3rem 1rem 1.5rem;
+      font-size: .98rem;
+      color: var(--text-light);
+      margin-top: 2.5rem;
+      background: transparent;
+      user-select: none;
+    }
+
+    /* ---------- MODALS ---------- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      inset: 0;
+      background: rgba(0,0,0,.48);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {display:flex;}
+    .modal-content {
+      background: var(--card);
+      color: var(--text-dark);
+      border-radius: var(--radius);
+      padding: 3.25rem 2.5rem 2.2rem;
+      width: 96vw;
+      max-width: 420px;
+      margin: 1.5rem;
+      box-shadow: 0 12px 32px rgba(0,0,0,.17);
+      text-align: center;
+      position: relative;
+      animation: fadeIn .24s cubic-bezier(0.5,0,0.2,1);
+    }
+    @keyframes fadeIn{from{opacity:0;transform:scale(.94);}to{opacity:1;transform:scale(1);}}
+    .modal-content h3 { color: var(--teal); margin-bottom: 1.2rem; font-size:1.22rem;}
+    .modal-content small {font-size:1rem;color:var(--text-light);}
+    .modal-content input,
+    .modal-content select {
+      display: block;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 1rem 1.1rem;
+      margin: 1rem 0 1.5rem 0;
+      font-size: 1.06rem;
+      background: #f9f9f9;
+      outline: none;
+      transition: border var(--transition);
+    }
+    .modal-content input:focus {border-color:var(--teal);}
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: .7rem;
+    }
+    .pill {
+      border: none;
+      background: var(--teal);
+      color: #fff;
+      padding: .9rem 2.1rem;
+      border-radius: 42px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      box-shadow:0 2px 8px rgba(0,0,0,.08);
+      margin: 2px 0;
+      outline: none;
+    }
+    .pill:hover, .pill:focus {background:var(--teal-dark);}
+    .pill.sand{background:var(--sand);}
+    .pill.sand:hover, .pill.sand:focus{background:var(--sand-dark);}
+    .close {
+      position: absolute; top: 1rem; right: 1.3rem;
+      font-size: 2.2rem;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color var(--transition);
+      z-index:2;
+    }
+    .close:hover { color: var(--teal-dark); }
+
+    /* ---------- DARK MODE ---------- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #121212;
+        --card: #191c1d;
+        --text-dark: #e0e0e0;
+        --text-light: #b9b9b9;
+        --border: #2D353D;
+        --shadow: 0 10px 32px rgba(0,0,0,.36);
+      }
+      .card { border:1.2px solid #2D353D;}
+    }
+    body.dark {
+      --page-bg: #121212;
+      --card: #1e1e1e;
+      --text-dark: #e0e0e0;
+      --text-light: #b5b5b5;
+      --border: #333;
+      --shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+
+    /* ---------- RESPONSIVENESS ---------- */
+    @media (max-width: 960px) {
+      .grid {gap:1.5rem;}
+    }
+    @media (max-width: 600px) {
+      .modal-content{padding:2.1rem .8rem;}
+      .card{padding:2rem 1.1rem;}
+    }
+    @media (max-width: 480px){
+      header{padding:1.2rem .3rem 1.1rem;}
+      .hero{font-size:1.09rem;}
+      footer{padding:1.3rem .4rem .8rem;}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <span id="logo" aria-label="Food Wise Logo">Food Wise</span>
+    <button class="theme-toggle" aria-label="Toggle dark mode" id="themeToggleBtn" title="Toggle dark mode">🌙</button>
+  </div>
+  <div id="impactBar">🌱 <span id="kg">0</span> kg meals saved this month = <span id="plates">0</span> plates donated</div>
+</header>
+
+<section class="hero" aria-label="Mission Quote">
+  <span>“Every bite counts – let’s feed bellies, not bins.”</span>
+</section>
+
+<main class="container" aria-label="Main Actions">
+  <div class="grid">
+    <div class="card" tabindex="0">
+      <h3>🔄 Update Tomorrow’s Meal Plan</h3>
+      <p>Mark your presence for tomorrow. Helps us cook just enough and cut waste.</p>
+      <button id="enrollBtn" aria-label="Update Tomorrow's Meal Plan">Update Meal Plan</button>
+    </div>
+    <div class="card" tabindex="0">
+      <h3>📊 Diet-Chart Generator</h3>
+      <p>Get macro recommendations based on today’s menu and your activity.</p>
+      <button id="dietBtn" aria-label="Generate Diet Chart">Diet Chart</button>
+    </div>
+    <div class="card" tabindex="0">
+      <h3>📋 View your Mess Menu</h3>
+      <p>Instantly see today’s food offerings for your hostel.</p>
+      <button id="menuBtn" aria-label="View Today’s Menu">View Menu</button>
+    </div>
+    <div class="card" tabindex="0">
+      <h3>💬 Give Feedback</h3>
+      <p>Quick form – help us improve with your honest feedback.</p>
+      <button id="feedbackBtn" aria-label="Give Feedback">Feedback</button>
+    </div>
+    <div class="card" tabindex="0">
+      <h3>👨‍🍳 Mess Staff Info</h3>
+      <p>Live dashboard & trend for mess attendance and kitchen staff.</p>
+      <button id="staffBtn" aria-label="View Mess Staff Dashboard">Staff Dashboard</button>
+    </div>
+  </div>
+</main>
+
+<footer>Made with ❤️ by students, for students. &nbsp;|&nbsp; <a href="#" style="color:var(--teal);text-decoration:none;">Learn&nbsp;More</a></footer>
+
+<!-- ==================== MODALS ==================== -->
+<!-- 1. ENROLL MODAL -->
+<div id="enrollModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="enrollModalTitle">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="enrollModal" aria-label="Close">&times;</button>
+    <h3 id="enrollModalTitle">Enter your Enrollment Number</h3>
+    <input id="enrollInput" type="text" placeholder="e.g. 1234567890" autocomplete="off" maxlength="12" aria-label="Enrollment Number">
+    <div class="modal-actions">
+      <button class="pill" id="submitEnroll">Next</button>
+    </div>
+  </div>
+</div>
+<!-- 2. HOSTEL CHOICE -->
+<div id="hostelModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="hostelModalTitle">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="hostelModal" aria-label="Close">&times;</button>
+    <h3 id="hostelModalTitle">Select your Hostel</h3>
+    <div class="modal-actions">
+      <button class="pill" data-hostel="Tejas">Tejas</button>
+      <button class="pill" data-hostel="Ambaram">Ambaram</button>
+      <button class="pill" data-hostel="Vasudha">Vasudha</button>
+    </div>
+  </div>
+</div>
+<!-- 3. MEAL SELECTION -->
+<div id="mealModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="mealModalTitle">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="mealModal" aria-label="Close">&times;</button>
+    <h3 id="mealModalTitle">Which meals would you like tomorrow?<br><small>(pick at least one)</small></h3>
+    <form id="mealForm" style="margin:1.2rem 0 1.8rem;text-align:left;">
+      <label style="display:flex;align-items:center;margin:.6rem 0;">
+        <input type="checkbox" value="Breakfast" style="margin-right:12px;width:20px;height:20px;"> 🌅 Breakfast
+      </label>
+      <label style="display:flex;align-items:center;margin:.6rem 0;">
+        <input type="checkbox" value="Lunch" style="margin-right:12px;width:20px;height:20px;"> 🍱 Lunch
+      </label>
+      <label style="display:flex;align-items:center;margin:.6rem 0;">
+        <input type="checkbox" value="Dinner" style="margin-right:12px;width:20px;height:20px;"> 🍽️ Dinner
+      </label>
+    </form>
+    <div class="modal-actions">
+      <button class="pill" id="confirmMeals">Confirm Meals</button>
+    </div>
+  </div>
+</div>
+<!-- 4. SUCCESS MODAL -->
+<div id="successModal" class="modal" role="alertdialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="successModal" aria-label="Close">&times;</button>
+    <h3>✅ Success</h3>
+    <p>Your meal plan has been updated! Bon appétit!</p>
+  </div>
+</div>
+<!-- 5. ALREADY REGISTERED -->
+<div id="alreadyModal" class="modal" role="alertdialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="alreadyModal" aria-label="Close">&times;</button>
+    <h3>Already Registered</h3>
+    <p>You already updated for tomorrow. Contact mess manager to revise.</p>
+  </div>
+</div>
+<!-- 6. DIET CHART FLOW -->
+<div id="dietModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="dietModalTitle">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="dietModal" aria-label="Close">&times;</button>
+    <h3 id="dietModalTitle">Choose Activity Level</h3>
+    <div class="modal-actions">
+      <button class="pill sand" data-level="high">High Burn</button>
+      <button class="pill sand" data-level="low">Low Burn</button>
+    </div>
+  </div>
+</div>
+<div id="hostelModal2" class="modal" role="dialog" aria-modal="true" aria-labelledby="hostelModal2Title">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="hostelModal2" aria-label="Close">&times;</button>
+    <h3 id="hostelModal2Title">Select your Hostel</h3>
+    <div class="modal-actions">
+      <button class="pill" data-hostel2="Tejas">Tejas</button>
+      <button class="pill" data-hostel2="Ambaram">Ambaram</button>
+      <button class="pill" data-hostel2="Vasudha">Vasudha</button>
+    </div>
+  </div>
+</div>
+<div id="mealModal2" class="modal" role="dialog" aria-modal="true" aria-labelledby="mealModal2Title">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="mealModal2" aria-label="Close">&times;</button>
+    <h3 id="mealModal2Title">Select the meal</h3>
+    <div class="modal-actions">
+      <button class="pill" data-meal2="Breakfast">Breakfast</button>
+      <button class="pill" data-meal2="Lunch">Lunch</button>
+      <button class="pill" data-meal2="Dinner">Dinner</button>
+    </div>
+  </div>
+</div>
+<!-- 7. STAFF DASHBOARD -->
+<div id="staffModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="staffDashTitle">
+  <div class="modal-content" style="max-width:900px;width:98vw;">
+    <button class="close" type="button" data-close="staffModal" aria-label="Close">&times;</button>
+    <h3 id="staffDashTitle">Live Mess Dashboard</h3>
+    <div id="todayList" style="max-height:330px;overflow-x:auto;"></div>
+  </div>
+</div>
+<!-- 8. OFFLINE MODAL -->
+<div id="offlineModal" class="modal" role="alertdialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="offlineModal" aria-label="Close">&times;</button>
+    <h3>⚠️ Offline</h3>
+    <p>Please check your internet connection and try again.</p>
+  </div>
+</div>
+<!-- 9. Pick hostel for Menu -->
+<div id="menuHostelModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="menuHostelModalTitle">
+  <div class="modal-content">
+    <button class="close" type="button" data-close="menuHostelModal" aria-label="Close">&times;</button>
+    <h3 id="menuHostelModalTitle">Pick your Hostel</h3>
+    <div class="modal-actions">
+      <button class="pill" data-menu-hostel="Tejas">Tejas</button>
+      <button class="pill" data-menu-hostel="Vasudha">Vasudha</button>
+      <button class="pill" data-menu-hostel="Ambaram">Ambaram</button>
+    </div>
+  </div>
+</div>
+<script type="module">
+  // --- THEME TOGGLE -----------
+  const themeBtn = document.getElementById('themeToggleBtn');
+  themeBtn.onclick = function() {
+    document.body.classList.toggle('dark');
+    themeBtn.textContent = document.body.classList.contains('dark') ? '🌞' : '🌙';
+    localStorage.setItem('fw-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  };
+  // Load theme from storage on DOMContentLoaded
+  window.addEventListener('DOMContentLoaded',()=>{
+    if(localStorage.getItem('fw-theme')==='dark')
+      document.body.classList.add('dark'), themeBtn.textContent = '🌞';
+    else
+      document.body.classList.remove('dark'), themeBtn.textContent = '🌙';
+  });
+
+  // --- ANIMATE IMPACT BAR -----------
+  function animate(id, target) {
+    const el = document.getElementById(id);
+    let i = 0, inc = Math.max(1, Math.floor(target/60));
+    const t = setInterval(()=>{el.textContent=++i;if(i>=target)clearInterval(t);},20);
+  }
+  animate('kg',100);
+  animate('plates',240);
+
+  // --- MODAL HELPERS -----------
+  function $(q) { return document.querySelector(q); }
+  function $$(q) { return document.querySelectorAll(q); }
+  function openModal(id){
+    $('#' + id).classList.add('active');
+    setTimeout(()=>{ $('#' + id + ' input, #' + id + ' button.pill')?.focus(); }, 1);
+  }
+  function closeModal(id){
+    $('#' + id).classList.remove('active');
+  }
+  $$('.close').forEach(btn=>btn.onclick=()=>closeModal(btn.dataset.close));
+  window.onclick = e => {
+    // Modal click-outside-to-close
+    if (e.target.classList.contains('modal')) e.target.classList.remove('active');
+  }
+
+  // -- Animate modal opening with focus trap for accessibility --
+  function trapFocus(modalId){
+    let modal = $('#'+modalId);
+    if(!modal) return;
+    const focusable = modal.querySelectorAll('input,button.pill,[tabindex]:not([tabindex="-1"])');
+    if(!focusable.length) return;
+    let first = focusable[0], last = focusable[focusable.length-1];
+    modal.onkeydown = function(e){
+      if(e.key==='Tab'){
+        if(e.shiftKey){
+          if(document.activeElement===first){last.focus();e.preventDefault();}
+        }else{
+          if(document.activeElement===last){first.focus();e.preventDefault();}
+        }
+      }
+      if(e.key==='Escape'){closeModal(modalId);}
+    };
+  }
+  $$('.modal').forEach(m=>m.addEventListener('transitionend',()=>{if(m.classList.contains('active'))trapFocus(m.id);}));
+
+  // --- MEAL PLAN LOGIC -----------
+  let enroll = '', hostel = '', meal = '', calorieLevel = '';
+  window.addEventListener('DOMContentLoaded',()=>{
+    enroll = localStorage.getItem('fw-enroll') || '';
+    hostel = localStorage.getItem('fw-hostel') || '';
+  });
+
+  $('#enrollBtn').onclick=()=>{openModal('enrollModal');$('#enrollInput').focus();};
+  $('#submitEnroll').onclick=()=>{
+    const val = $('#enrollInput').value.trim();
+    if(!val){alert('Enter enrollment');return;}
+    enroll = val;
+    localStorage.setItem('fw-enroll', enroll);
+    closeModal('enrollModal');
+    openModal('hostelModal');
+  };
+  $$('[data-hostel]').forEach(btn=>btn.onclick=()=>{
+    hostel = btn.dataset.hostel;
+    localStorage.setItem('fw-hostel', hostel);
+    closeModal('hostelModal');
+    openModal('mealModal');
+  });
+  $('#confirmMeals').onclick=()=>{
+    const checked = Array.from($$('#mealForm input:checked')).map(cb=>cb.value);
+    if(!checked.length){alert('Pick at least one meal');return;}
+    meal = checked.join(',');
+    closeModal('mealModal');
+    // --------- FIREBASE LOGIC (Demo: Remove or replace in production) -----
+    const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0,10);
+    const dayRef = `https://foodwise-be544-default-rtdb.firebaseio.com/meals/${tomorrow}.json`;
+    fetch(dayRef).then(r=>r.json()).then(data=>{
+      const exists=data && Object.values(data).some(r=>r.enroll===enroll);
+      if(exists){openModal('alreadyModal');return;}
+      submitMeal({enroll,hostel,meal,at:Date.now()});
+      openModal('successModal'); setTimeout(()=>closeModal('successModal'),2000);
+    }).catch(()=>{
+      submitMeal({enroll,hostel,meal,at:Date.now()});
+      openModal('successModal'); setTimeout(()=>closeModal('successModal'),2000);
+    });
+    // ------------------------------------------------------------
+  };
+  // Firebase demo-only:
+  function submitMeal(data) {
+    // Here you should send data to your backend or Firebase, or mock as needed
+    // console.log('Meal submitted:',data);
+  }
+
+  // --- DIET CHART LOGIC -----------
+  $('#dietBtn').onclick=()=>openModal('dietModal');
+  $$('[data-level]').forEach(btn=>btn.onclick=()=>{
+    calorieLevel = btn.dataset.level;
+    closeModal('dietModal');
+    openModal('hostelModal2');
+  });
+  $$('[data-hostel2]').forEach(btn=>btn.onclick=()=>{
+    hostel = btn.dataset.hostel2;
+    closeModal('hostelModal2');
+    openModal('mealModal2');
+  });
+  $$('[data-meal2]').forEach(btn=>btn.onclick=()=>{
+    const chosenMeal = btn.dataset.meal2;
+    closeModal('mealModal2');
+    // Real links or Sheets go here:
+    const sheetId = calorieLevel==='high'
+      ? 'xxxHighSheet'
+      : 'yyyLowSheet';
+    window.open(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:html&sheet=${chosenMeal}`,'_blank','noopener');
+  });
+
+  // --- MENU BUTTON LOGIC -----------
+  $('#menuBtn').onclick=()=>openModal('menuHostelModal');
+  $$('[data-menu-hostel]').forEach(btn=>btn.onclick=()=>{
+    const h = btn.dataset.menuHostel;
+    closeModal('menuHostelModal');
+    window.open(`https://docs.google.com/spreadsheets/d/1MENU_${h}/gviz/tq?tqx=out:html&sheet=Today`,'_blank','noopener');
+  });
+
+  // --- FEEDBACK LOGIC -----------
+  $('#feedbackBtn').onclick=()=>{
+    window.open('https://forms.gle/demo', '_blank','noopener');
+  };
+
+  // --- STAFF DASHBOARD LOGIC -----------
+  const staffBtn = $('#staffBtn');
+  const todayList = $('#todayList');
+  let staffInterval;
+  staffBtn.onclick=()=>{
+    openModal('staffModal');
+    loadTodayTomorrowHostelMeal();
+    staffInterval=setInterval(loadTodayTomorrowHostelMeal,30000);
+  };
+  $('[data-close="staffModal"]').onclick=()=>{
+    closeModal('staffModal');
+    clearInterval(staffInterval);
+  };
+
+  function buildTable(label, data) {
+    if (!data) return `<h4 style="color:var(--teal);margin:1rem 0 .4rem">${label}</h4>
+      <p style="color:#888;">No data yet.</p>`;
+    const bucket = {};
+    Object.values(data).forEach(r=>{
+      const h=r.hostel, m=r.meal;
+      bucket[h]=bucket[h]||{};
+      bucket[h][m]=(bucket[h][m]||0)+1;
+    });
+    let html = `<h4 style="color:var(--teal);margin:1rem 0 .4rem">${label}</h4>
+      <div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;">
+      <thead><tr style="background:var(--teal);color:#fff">
+      <th style="padding:.5rem;text-align:left">Hostel</th>
+      <th style="padding:.5rem;text-align:center">Breakfast</th>
+      <th style="padding:.5rem;text-align:center">Lunch</th>
+      <th style="padding:.5rem;text-align:center">Dinner</th>
+      <th style="padding:.5rem;text-align:center">Total</th>
+      </tr></thead><tbody>`;
+    ['Tejas', 'Ambaram', 'Vasudha'].forEach(h=>{
+      if(!bucket[h]) return;
+      const b = bucket[h].Breakfast||0,
+            l = bucket[h].Lunch||0,
+            d = bucket[h].Dinner||0,
+            sum = b+l+d;
+      html += `<tr>
+        <td style="padding:.5rem;font-weight:600;">${h}</td>
+        <td style="padding:.5rem;text-align:center;">${b}</td>
+        <td style="padding:.5rem;text-align:center;">${l}</td>
+        <td style="padding:.5rem;text-align:center;">${d}</td>
+        <td style="padding:.5rem;text-align:center;font-weight:600;">${sum}</td>
+      </tr>`;
+    });
+    html += '</tbody></table></div>';
+    return html;
+  }
+  function loadTodayTomorrowHostelMeal() {
+    const today = new Date().toISOString().slice(0,10);
+    const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+    const urls = [
+      `https://foodwise-be544-default-rtdb.firebaseio.com/meals/${today}.json`,
+      `https://foodwise-be544-default-rtdb.firebaseio.com/meals/${tomorrow}.json`
+    ];
+    Promise.all(urls.map(u=>fetch(u).then(r=>r.json())))
+    .then(([todayData, tomorrowData])=>{
+      todayList.innerHTML =
+        buildTable('Today', todayData) +
+        buildTable('Tomorrow', tomorrowData);
+    })
+    .catch(()=>{ todayList.innerHTML = '<p style="color:red;">Failed to load.</p>' });
+  }
+
+  // --- PWA install prompt etc ---
+  // You can register a service worker here if desired
+</script>
+</body>
+</html>
+
