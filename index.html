@@ -456,6 +456,7 @@
     </div>
   </div>
 
+
   <div id="successModal" class="modal" role="alertdialog" aria-modal="true">
     <div class="modal-content">
       <button class="close" data-close="successModal">&times;</button>
@@ -670,12 +671,26 @@
     });
 
     /* ---------- menu button ---------- */
-    $('#menuBtn').onclick = () => openModal('menuHostelModal');
-    $$('[data-menu-hostel]').forEach(btn => btn.onclick = () => {
-      const h = btn.dataset.menuHostel;
-      closeModal('menuHostelModal');
-      window.open(`https://docs.google.com/spreadsheets/d/1MENU_${h}/gviz/tq?tqx=out:html&sheet=Today`, '_blank', 'noopener');
-    });
+/* ---------- 1️⃣  HOSTEL MESS-MENU LINKS ---------- */
+const MENU_SHEET = {               // ← add this once, near the top of the script
+  Tejas:
+    'https://drive.google.com/file/d/1kOxl4IdA-AwdPmlZ5Vqof1TSWDUJuTNR/view?usp=drive_link',
+  Vasudha:
+    'https://drive.google.com/file/d/1ux9bvg1mErWbmdHJlukqIaxy22gPw7us/view?usp=drive_link',
+  Ambaram:
+    'https://drive.google.com/file/d/1vWLpEOSfdBg5_YYe5klZxc8qkzjzHEQC/view?usp=drive_link'
+};
+/* ---------- 2️⃣  “View Menu” flow ---------- */
+$('#menuBtn').onclick = () => openModal('menuHostelModal');
+
+/* replace the old listener with this one-liner */
+$$('[data-menu-hostel]').forEach(btn =>
+  btn.onclick = () => {
+    const h = btn.dataset.menuHostel;          // Tejas / Vasudha / Ambaram
+    closeModal('menuHostelModal');
+    window.open(MENU_SHEET[h], '_blank', 'noopener');   // opens the correct sheet
+  }
+);
 
     /* ---------- feedback button ---------- */
     $('#feedbackBtn').onclick = () => window.open('https://docs.google.com/forms/d/e/1FAIpQLSf8yWqkXfxq6uk1k53uqpRw0O7TZUjfg_LNcpOzEhBp4VcH6g/viewform', '_blank', 'noopener');
