@@ -354,6 +354,128 @@
     .noscript-box a:hover {
         text-decoration: underline;
     }
+
+    /* Food Wastage Modal Specific Styles */
+    #foodWastageModal .modal-content {
+      max-width: 1200px;
+      width: 98vw;
+      max-height: 95vh;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+
+    .wastage-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      text-align: center;
+      animation: slideInUp 0.8s ease-out;
+    }
+
+    .impact-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .impact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    }
+
+    .hostel-wastage-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hostel-wastage-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary);
+      transform-origin: left;
+      animation: wastageBar 3s ease-in-out infinite;
+    }
+
+    @keyframes wastageBar {
+      0%, 100% { transform: scaleX(0.3); }
+      50% { transform: scaleX(0.8); }
+    }
+
+    .counter {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      display: block;
+    }
+
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .wastage-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    .wastage-indicator.high { background: #e74c3c; }
+    .wastage-indicator.medium { background: #f39c12; }
+    .wastage-indicator.low { background: #27ae60; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.2); }
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      #foodWastageModal .modal-content {
+        padding: 1.5rem;
+      }
+
+      .wastage-hero {
+        padding: 1.5rem;
+      }
+
+      .impact-section {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -415,7 +537,7 @@
     </noscript>
   </main>
 
-  <footer>Made with ❤️ by students, for students. | <a href="#" style="color:var(--primary)">Learn More</a></footer>
+  <footer>Made with ❤️ by students, for students. | <button onclick="openFoodWastageModal()" style="color:var(--primary);background:none;border:none;text-decoration:underline;cursor:pointer;font-size:inherit;">Learn More</button></footer>
 
   <!-- MODALS -->
   <div id="enrollModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="enrollModalTitle">
@@ -550,6 +672,127 @@
       <button class="close" data-close="staffModal">&times;</button>
       <h3 id="staffDashTitle">Live Mess Dashboard</h3>
       <div id="todayList" style="max-height:50vh;overflow-x:auto"></div>
+    </div>
+  </div>
+
+  <!-- Food Wastage Modal -->
+  <div id="foodWastageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="foodWastageTitle">
+    <div class="modal-content" style="max-width:1200px;width:98vw;max-height:95vh;overflow-y:auto;padding:2rem">
+      <button class="close" data-close="foodWastageModal">&times;</button>
+      <h2 id="foodWastageTitle" style="color:var(--primary);margin-bottom:2rem;font-size:2rem">The Hidden Cost of Food Waste in College Hostels</h2>
+
+      <!-- Hero Statistics Section -->
+      <div class="wastage-hero" style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:white;padding:2.5rem;border-radius:20px;margin-bottom:3rem;text-align:center">
+        <h3 style="font-size:2.5rem;margin-bottom:1rem">🚨 20-40 kg Wasted Daily Per Hostel</h3>
+        <p style="font-size:1.2rem;opacity:0.9">That's equivalent to <span id="dailyMeals">80-160</span> student meals thrown away every single day</p>
+      </div>
+
+      <!-- Time-lapse Visualization Section -->
+      <div class="visualization-section" style="margin-bottom:3rem">
+        <h3 style="color:var(--primary);margin-bottom:1.5rem;text-align:center;font-size:1.5rem">📊 Live Food Wastage Tracker</h3>
+        <div class="hostel-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem">
+          <!-- Hostel Cards will be dynamically generated here -->
+        </div>
+        <div class="daily-wastage-chart" style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:2rem;position:relative;height:300px">
+          <canvas id="wastageChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Environmental Impact Section -->
+      <div class="impact-section" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:3rem">
+        <div class="impact-card" style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:2rem;text-align:center;position:relative">
+          <div style="font-size:3rem;margin-bottom:1rem">💧</div>
+          <h4 style="color:var(--primary);margin-bottom:1rem">Water Wasted</h4>
+          <div class="counter" data-target="15000" style="font-size:2.5rem;font-weight:bold;color:var(--primary-dark)">0</div>
+          <p style="margin-top:0.5rem;color:var(--text-light)">Liters per month</p>
+        </div>
+        <div class="impact-card" style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:2rem;text-align:center">
+          <div style="font-size:3rem;margin-bottom:1rem">💰</div>
+          <h4 style="color:var(--primary);margin-bottom:1rem">Money Lost</h4>
+          <div class="counter" data-target="750000" style="font-size:2.5rem;font-weight:bold;color:var(--primary-dark)">0</div>
+          <p style="margin-top:0.5rem;color:var(--text-light)">Rupees per month</p>
+        </div>
+        <div class="impact-card" style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:2rem;text-align:center">
+          <div style="font-size:3rem;margin-bottom:1rem">🌍</div>
+          <h4 style="color:var(--primary);margin-bottom:1rem">CO₂ Emissions</h4>
+          <div class="counter" data-target="2400" style="font-size:2.5rem;font-weight:bold;color:var(--primary-dark)">0</div>
+          <p style="margin-top:0.5rem;color:var(--text-light)">Kg per month</p>
+        </div>
+        <div class="impact-card" style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:2rem;text-align:center">
+          <div style="font-size:3rem;margin-bottom:1rem">⚡</div>
+          <h4 style="color:var(--primary);margin-bottom:1rem">Energy Wasted</h4>
+          <div class="counter" data-target="8500" style="font-size:2.5rem;font-weight:bold;color:var(--primary-dark)">0</div>
+          <p style="margin-top:0.5rem;color:var(--text-light)">kWh per month</p>
+        </div>
+      </div>
+
+      <!-- Interactive Calculator Section -->
+      <div class="calculator-section" style="background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:2.5rem;margin-bottom:3rem">
+        <h3 style="color:var(--primary);margin-bottom:2rem;text-align:center">🧮 Calculate Your Impact</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem">
+          <div>
+            <label style="display:block;margin-bottom:0.5rem;font-weight:600">Your Hostel</label>
+            <select id="userHostel" style="width:100%;padding:0.8rem;border:2px solid var(--border);border-radius:10px;background:var(--page-bg);color:var(--text-dark)">
+              <option value="Tejas">Tejas</option>
+              <option value="Ambaram">Ambaram</option>
+              <option value="Vasudha">Vasudha</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;margin-bottom:0.5rem;font-weight:600">Meals You Skip Per Week</label>
+            <input type="range" id="skipMeals" min="0" max="21" value="0" style="width:100%">
+            <div style="text-align:center;font-weight:bold;color:var(--primary)"><span id="skipValue">0</span> meals</div>
+          </div>
+        </div>
+        <div id="calculationResult" style="margin-top:2rem;padding:1.5rem;background:rgba(0,166,153,0.1);border-radius:15px;display:none">
+          <h4 style="color:var(--primary);margin-bottom:1rem">Your Annual Impact</h4>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+            <div><strong>Water Saved:</strong> <span id="waterSaved">0</span> liters</div>
+            <div><strong>Money Saved:</strong> ₹<span id="moneySaved">0</span></div>
+            <div><strong>CO₂ Reduced:</strong> <span id="co2Reduced">0</span> kg</div>
+            <div><strong>Meals Available:</strong> <span id="mealsAvailable">0</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action Section -->
+      <div class="cta-section" style="text-align:center;margin-bottom:2rem">
+        <h3 style="color:var(--primary);margin-bottom:1.5rem">🎯 Take Action Today</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:2rem">
+          <button class="pill" onclick="showPledgeModal()">Take the Pledge</button>
+          <button class="pill sand" onclick="showShareModal()">Share Awareness</button>
+          <button class="pill" onclick="scrollToMealPlanning()">Start Planning</button>
+        </div>
+        <p style="color:var(--text-light);font-size:1.1rem">Every meal planned is a meal saved. Every bite counts!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Modals for Engagement -->
+  <div id="pledgeModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="close" data-close="pledgeModal">&times;</button>
+      <h3 style="color:var(--primary);margin-bottom:1.5rem">🤝 Take the Zero-Waste Pledge</h3>
+      <div style="text-align:center">
+        <div style="font-size:3rem;margin-bottom:1rem">♻️</div>
+        <p style="margin-bottom:2rem;font-size:1.1rem">I commit to reducing food waste by planning my meals and only taking what I can finish.</p>
+        <button class="pill" id="signPledge">Sign the Pledge</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="shareModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="close" data-close="shareModal">&times;</button>
+      <h3 style="color:var(--primary);margin-bottom:1.5rem">📱 Share the Message</h3>
+      <div style="text-align:center">
+        <p style="margin-bottom:2rem">Help spread awareness about food wastage in our college hostels</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <button class="pill" onclick="shareWhatsApp()">WhatsApp</button>
+          <button class="pill" onclick="shareTwitter()">Twitter</button>
+          <button class="pill" onclick="copyLink()">Copy Link</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -767,6 +1010,264 @@ $$('[data-menu-hostel]').forEach(btn =>
       const results = await Promise.all(promises);
       todayList.innerHTML = results.map((data, idx) => buildTable(labels[idx], data)).join('');
     }
+
+    /* ---------- Food Wastage Modal Functions ---------- */
+    function openFoodWastageModal() {
+      openModal('foodWastageModal');
+      initializeWastageVisualizations();
+    }
+
+    function initializeWastageVisualizations() {
+      // Generate hostel cards with dynamic data
+      generateHostelCards();
+
+      // Start animated counters
+      startCounters();
+
+      // Initialize time-lapse visualization
+      initializeTimeLapseChart();
+
+      // Setup calculator event listeners
+      setupCalculator();
+    }
+
+    function generateHostelCards() {
+      const hostels = ['Tejas', 'Ambaram', 'Vasudha'];
+      const container = document.querySelector('.hostel-cards');
+      container.innerHTML = ''; // Clear existing cards
+
+      hostels.forEach(hostel => {
+        const wastage = 20 + Math.random() * 20; // 20-40kg random
+        const level = wastage > 30 ? 'high' : wastage > 25 ? 'medium' : 'low';
+
+        const card = document.createElement('div');
+        card.className = 'hostel-wastage-card';
+        card.innerHTML = `
+          <h4 style="color:var(--primary);margin-bottom:1rem">${hostel} Hostel</h4>
+          <div class="wastage-value" style="font-size:2.5rem;font-weight:bold;margin-bottom:0.5rem">${wastage.toFixed(1)} kg</div>
+          <div style="color:var(--text-light);margin-bottom:1rem">Daily Average</div>
+          <div><span class="wastage-indicator ${level}"></span><span class="wastage-level">${level.charAt(0).toUpperCase() + level.slice(1)} Wastage</span></div>
+          <div class="meals-count" style="margin-top:1rem;font-size:0.9rem;color:var(--text-light)">≈ ${(wastage * 4).toFixed(0)} meals/day</div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateDailyMeals();
+    }
+
+    function startCounters() {
+      document.querySelectorAll('.counter').forEach(counter => {
+        const target = parseInt(counter.dataset.target);
+        const increment = target / 100;
+        let current = 0;
+
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            counter.textContent = Math.floor(current).toLocaleString();
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target.toLocaleString();
+          }
+        };
+
+        // Start animation when element is in viewport
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              updateCounter();
+              observer.unobserve(entry.target);
+            }
+          });
+        });
+
+        observer.observe(counter);
+      });
+    }
+
+    function initializeTimeLapseChart() {
+      const canvas = document.getElementById('wastageChart');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = 250;
+
+      // Generate sample data for the last 7 days
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const data = days.map(() => 20 + Math.random() * 20);
+
+      // Simple chart drawing
+      const maxValue = Math.max(...data);
+      const chartWidth = canvas.width - 60;
+      const chartHeight = canvas.height - 40;
+      const barWidth = chartWidth / days.length;
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw bars
+      data.forEach((value, index) => {
+        const barHeight = (value / maxValue) * chartHeight;
+        const x = 30 + index * barWidth;
+        const y = canvas.height - 30 - barHeight;
+
+        // Gradient fill
+        const gradient = ctx.createLinearGradient(x, y + barHeight, x, y);
+        gradient.addColorStop(0, '#00A699');
+        gradient.addColorStop(1, '#008b7d');
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(x + barWidth * 0.2, y, barWidth * 0.6, barHeight);
+
+        // Labels
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-dark');
+        ctx.font = '12px Inter';
+        ctx.textAlign = 'center';
+        ctx.fillText(days[index], x + barWidth / 2, canvas.height - 10);
+        ctx.fillText(value.toFixed(1) + 'kg', x + barWidth / 2, y - 5);
+      });
+    }
+
+    function setupCalculator() {
+      const skipSlider = document.getElementById('skipMeals');
+      const skipValue = document.getElementById('skipValue');
+      const hostelSelect = document.getElementById('userHostel');
+
+      if (skipSlider) {
+        skipSlider.addEventListener('input', () => {
+          skipValue.textContent = skipSlider.value;
+          calculateImpact();
+        });
+      }
+
+      if (hostelSelect) {
+        hostelSelect.addEventListener('change', calculateImpact);
+      }
+
+      // Initial calculation
+      setTimeout(calculateImpact, 1000);
+    }
+
+    function calculateImpact() {
+      const skipMeals = parseInt(document.getElementById('skipMeals').value);
+      const resultDiv = document.getElementById('calculationResult');
+
+      if (skipMeals > 0) {
+        const waterSaved = skipMeals * 52 * 15; // 52 weeks, 15L per meal
+        const moneySaved = skipMeals * 52 * 45; // ₹45 per meal
+        const co2Reduced = skipMeals * 52 * 0.8; // 0.8kg CO2 per meal
+        const mealsAvailable = skipMeals * 52; // Meals that could feed others
+
+        document.getElementById('waterSaved').textContent = waterSaved.toLocaleString();
+        document.getElementById('moneySaved').textContent = moneySaved.toLocaleString();
+        document.getElementById('co2Reduced').textContent = co2Reduced.toLocaleString();
+        document.getElementById('mealsAvailable').textContent = mealsAvailable.toLocaleString();
+
+        resultDiv.style.display = 'block';
+        resultDiv.style.animation = 'slideInUp 0.5s ease-out';
+      } else {
+        resultDiv.style.display = 'none';
+      }
+    }
+
+    function showPledgeModal() {
+      closeModal('foodWastageModal');
+      openModal('pledgeModal');
+
+      // Handle pledge signing
+      document.getElementById('signPledge').onclick = () => {
+        const pledgeCount = parseInt(localStorage.getItem('pledgeCount') || '0') + 1;
+        localStorage.setItem('pledgeCount', pledgeCount);
+        localStorage.setItem('userPledged', 'true');
+        closeModal('pledgeModal');
+        openModal('foodWastageModal');
+
+        // Show success message
+        setTimeout(() => {
+          alert('Thank you for taking the pledge! You are part of the solution now. 🌱');
+        }, 300);
+      };
+    }
+
+    function showShareModal() {
+      closeModal('foodWastageModal');
+      openModal('shareModal');
+    }
+
+    function scrollToMealPlanning() {
+      closeModal('foodWastageModal');
+      document.getElementById('enrollBtn').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        document.getElementById('enrollBtn').click();
+      }, 800);
+    }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent('Did you know our college hostels waste 20-40kg of food daily? That\'s 80-160 meals! Let\'s take action together. 🌱');
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+
+    function shareTwitter() {
+      const text = encodeURIComponent('College hostel food waste: 20-40kg daily = 80-160 meals wasted! Time to take action. 🍽️♻️');
+      window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Link copied to clipboard! Share it with your friends. 📱');
+      });
+    }
+
+    // Update daily meals counter in hero section
+    function updateDailyMeals() {
+      const wastageElements = document.querySelectorAll('.hostel-wastage-card');
+      let totalWastage = 0;
+
+      wastageElements.forEach(card => {
+        const valueElement = card.querySelector('.wastage-value');
+        if (valueElement) {
+          const wastageText = valueElement.textContent;
+          totalWastage += parseFloat(wastageText);
+        }
+      });
+
+      const mealsCount = Math.floor(totalWastage * 4);
+      const dailyMealsElement = document.getElementById('dailyMeals');
+      if (dailyMealsElement) {
+        dailyMealsElement.textContent = mealsCount;
+      }
+    }
+
+    // Auto-update wastage data every 30 seconds to simulate real-time data
+    setInterval(() => {
+      document.querySelectorAll('.hostel-wastage-card').forEach(card => {
+        const valueElement = card.querySelector('.wastage-value');
+        if (valueElement) {
+          const currentValue = parseFloat(valueElement.textContent);
+          const newValue = 20 + Math.random() * 20;
+          valueElement.textContent = newValue.toFixed(1);
+
+          // Update level indicator
+          const level = newValue > 30 ? 'high' : newValue > 25 ? 'medium' : 'low';
+          const indicator = card.querySelector('.wastage-indicator');
+          if (indicator) {
+            indicator.className = `wastage-indicator ${level}`;
+            const levelText = card.querySelector('.wastage-level');
+            if (levelText) {
+              levelText.textContent = level.charAt(0).toUpperCase() + level.slice(1) + ' Wastage';
+            }
+          }
+
+          // Update meals count
+          const mealsElement = card.querySelector('.meals-count');
+          if (mealsElement) {
+            mealsElement.textContent = `≈ ${(newValue * 4).toFixed(0)} meals/day`;
+          }
+        }
+      });
+      updateDailyMeals();
+    }, 30000);
 
     /* ---------- PWA service-worker (offline) ---------- */
     if ('serviceWorker' in navigator) {
