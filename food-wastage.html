@@ -10,24 +10,28 @@
 
   <style>
     :root {
-      --page-bg: #f7f9fc;
+      --page-bg: #faf8f3;
       --card: #ffffff;
-      --primary: #00A699;
-      --primary-dark: #008b7d;
-      --text-dark: #222;
-      --text-light: #555;
-      --border: #e5e7eb;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --primary: #c62828;
+      --primary-dark: #a91e22;
+      --accent: #dc2626;
+      --warning: #f59e0b;
+      --text-dark: #2c3e50;
+      --text-light: #6c757d;
+      --border: #e1e5e9;
+      --shadow: 0 10px 30px rgba(0,0,0,.1);
       --radius: 24px;
-      --transition: .3s cubic-bezier(.4,0,.2,1);
+      --transition: .4s cubic-bezier(.4,0,.2,1);
     }
     body.dark {
-      --page-bg: #121212;
-      --card: #1e1e1e;
-      --text-dark: #f1f1f1;
-      --text-light: #bbb;
-      --border: #333;
-      --shadow: 0 10px 30px rgba(0,0,0,.4);
+      --page-bg: #1a1a1a;
+      --card: #2d2d2d;
+      --text-dark: #f8f9fa;
+      --text-light: #b2b2b2;
+      --border: #404040;
+      --shadow: 0 10px 30px rgba(0,0,0,.5);
+      --primary: #e74c3c;
+      --primary-dark: #c0392b;
     }
     * {
       box-sizing: border-box;
@@ -100,17 +104,41 @@
         padding: 3rem 1rem;
         margin-bottom: 2rem;
     }
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .hero-text {
+        text-align: left;
+    }
+    .hero-image {
+        position: relative;
+    }
     .hero-title {
-        font-size: clamp(2rem, 5vw, 3rem);
-        color: var(--primary);
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        color: var(--warning);
         margin-bottom: 1rem;
         font-weight: 800;
+        line-height: 1.2;
     }
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: var(--text-light);
-        max-width: 600px;
-        margin: 0 auto 2rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    .stats-highlight {
+        background: var(--warning);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        display: inline-block;
+        margin: 1rem 0;
     }
     .back-button {
         display: inline-flex;
@@ -360,6 +388,34 @@
         from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+        20%, 40%, 60%, 80% { transform: translateX(2px); }
+    }
+    @keyframes pulse-red {
+        0%, 100% {
+            background-color: var(--warning);
+            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+        }
+        50% {
+            background-color: var(--accent);
+            box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.3);
+        }
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    .shake-animation {
+        animation: shake 2s ease-in-out infinite;
+    }
+    .pulse-guilt {
+        animation: pulse-red 2s ease-in-out infinite;
+    }
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
     @keyframes countUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -410,15 +466,49 @@
   <main class="container">
     <div class="hero-section">
       <a href="index.html" class="back-button">← Back to Food Wise</a>
-      <h1 class="hero-title">The Hidden Cost of Food Waste in College Hostels</h1>
-      <p class="hero-subtitle">Every day, our hostels waste tons of food that could feed hungry students. Learn about the impact and take action to make a difference.</p>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">The Ugly Truth We Ignore Every Day</h1>
+          <p class="hero-subtitle">While millions sleep hungry, our college hostels throw away enough food to feed an entire village every single day. It's time to feel ashamed and take responsibility.</p>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1556911268-a3cbfe85a60a?auto=format&fit=crop&w=800&q=80" alt="Food waste in Indian hostel" style="width:100%;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.15)">
+          <div class="image-caption" style="text-align:center;margin-top:1rem;color:var(--text-light);font-style:italic;">Wasted food from an Indian college hostel - this happens every single day</div>
+        </div>
+      </div>
     </div>
 
     <!-- Hero Statistics Section -->
     <div class="wastage-hero">
-      <h3>🚨 20-40 kg Wasted Daily Per Hostel</h3>
-      <p>That's equivalent to <span id="dailyMeals">80-160</span> student meals thrown away every single day</p>
+      <h3>🚨 <span class="stats-highlight">67 Million</span> Tons of Food Wasted Annually in India</h3>
+      <p style="font-size:1.3rem;margin-bottom:1rem;">Our hostels contribute to this shame - <span id="dailyMeals">240-480</span> student meals thrown away every single day</p>
+      <div style="background:rgba(0,0,0,0.1);border-radius:12px;padding:1.5rem;margin-top:1.5rem;">
+        <h4 style="color:var(--warning);margin-bottom:0.8rem;">😔 The Hard Truth:</h4>
+        <p style="margin:0.5rem 0;font-size:1rem;">• <strong>194 Million</strong> Indians sleep hungry every night</p>
+        <p style="margin:0.5rem 0;font-size:1rem;">• Our wastage could feed <strong>3,000+ students</strong> daily</p>
+        <p style="margin:0.5rem 0;font-size:1rem;">• <strong>₹1,000 Crore</strong> lost yearly in Indian hostels</p>
+        <p style="margin:0.5rem 0;font-size:1rem;"><strong style="color:var(--warning);">This is OUR collective shame!</strong></p>
+      </div>
     </div>
+
+    <!-- Photo Evidence Section -->
+    <section class="section">
+      <h2 class="section-title" style="color:var(--warning);">😠 Photographic Evidence - This Happens Daily</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+        <div style="position:relative;border-radius:15px;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1545045155-b9c7c0a96b2?auto=format&fit=crop&w=400&q=80" alt="Plate waste" style="width:100%;height:250px;object-fit:cover;">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:white;padding:1rem;font-size:0.9rem;">Full plates thrown away - Daily sight in our mess</div>
+        </div>
+        <div style="position:relative;border-radius:15px;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-16063042426-2b7d8a0bbaf?auto=format&fit=crop&w=400&q=80" alt="Food waste bins" style="width:100%;height:250px;object-fit:cover;">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:white;padding:1rem;font-size:0.9rem;">Waste bins overflowing - This is OUR responsibility</div>
+        </div>
+        <div style="position:relative;border-radius:15px;overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1559837520-4ca37d5a1b9?auto=format&fit=crop&w=400&q=80" alt="Kitchen waste" style="width:100%;height:250px;object-fit:cover;">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:white;padding:1rem;font-size:0.9rem;">Kitchen preparation waste - Preventable planning needed</div>
+        </div>
+      </div>
+    </section>
 
     <!-- Time-lapse Visualization Section -->
     <section class="section">
@@ -433,31 +523,60 @@
 
     <!-- Environmental Impact Section -->
     <section class="section">
-      <h2 class="section-title">🌍 Environmental Impact</h2>
+      <h2 class="section-title pulse-guilt" style="font-size:2.2rem;">💔 How Our Daily Waste DESTROYS India's Future</h2>
+      <div style="text-align:center;margin-bottom:2rem;">
+        <p style="font-size:1.3rem;color:var(--warning);margin-bottom:1rem;">Every kg of food we waste = <strong style="font-size:1.5rem;">150 LITERS OF WATER</strong> wasted</p>
+        <p style="font-size:1.3rem;color:var(--warning);margin-bottom:1rem;">This is <strong style="font-size:1.5rem;">3 MONTHS of drinking water</strong> for one person</p>
+        <p style="font-size:1.3rem;color:var(--text-light);">While you throw food, someone else dies of thirst or hunger</p>
+      </div>
       <div class="impact-section">
-        <div class="impact-card">
-          <div class="impact-icon">💧</div>
-          <h4>Water Wasted</h4>
-          <div class="counter" data-target="15000">0</div>
-          <p>Liters per month</p>
+        <div class="impact-card shake-animation">
+          <div class="impact-icon floating">💧</div>
+          <h4 style="color:var(--warning);">Water CRISIS</h4>
+          <div class="counter" data-target="15000" style="color:var(--warning);">0</div>
+          <p style="color:var(--text-light);">Liters = <strong style="color:var(--warning);">60,000 Water Bottles</strong></p>
         </div>
-        <div class="impact-card">
-          <div class="impact-icon">💰</div>
-          <h4>Money Lost</h4>
-          <div class="counter" data-target="750000">0</div>
-          <p>Rupees per month</p>
+        <div class="impact-card shake-animation">
+          <div class="impact-icon floating">💰</div>
+          <h4 style="color:var(--warning);">National LOSS</h4>
+          <div class="counter" data-target="750000" style="color:var(--warning);">0</div>
+          <p style="color:var(--text-light);">Could fund <strong style="color:var(--warning);">75 Poor Students' Education</strong></p>
         </div>
-        <div class="impact-card">
-          <div class="impact-icon">🌍</div>
-          <h4>CO₂ Emissions</h4>
-          <div class="counter" data-target="2400">0</div>
-          <p>Kg per month</p>
+        <div class="impact-card shake-animation">
+          <div class="impact-icon floating">🌍</div>
+          <h4 style="color:var(--warning);">Climate KILLER</h4>
+          <div class="counter" data-target="2400" style="color:var(--warning);">0</div>
+          <p style="color:var(--text-light);">CO₂ = <strong style="color:var(--warning);">120 Tree Seedlings Destroyed</strong></p>
         </div>
-        <div class="impact-card">
-          <div class="impact-icon">⚡</div>
-          <h4>Energy Wasted</h4>
-          <div class="counter" data-target="8500">0</div>
-          <p>kWh per month</p>
+        <div class="impact-card shake-animation">
+          <div class="impact-icon floating">⚡</div>
+          <h4 style="color:var(--warning);">Energy THEFT</h4>
+          <div class="counter" data-target="8500" style="color:var(--warning);">0</div>
+          <p style="color:var(--text-light);">Could power <strong style="color:var(--warning);">170 Rural Homes</strong> for 1 month</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emotional Impact Section -->
+    <section class="section">
+      <h2 class="section-title pulse-guilt" style="font-size:2.2rem;">😔 The Real Faces Behind Our Waste</h2>
+      <div style="background:rgba(245,158,11,0.1);border-radius:20px;padding:2rem;margin-bottom:2rem;border:2px solid var(--warning);">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;">
+          <div style="text-align:center;">
+            <div style="font-size:3rem;margin-bottom:1rem;">👦🏠</div>
+            <h4 style="color:var(--warning);margin-bottom:0.5rem;">Hungry Child</h4>
+            <p style="color:var(--text-light);">Your waste could be their only meal today</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:3rem;margin-bottom:1rem;">👵👵</div>
+            <h4 style="color:var(--warning);margin-bottom:0.5rem;">Farmer's Hard Work</h4>
+            <p style="color:var(--text-light);">130 days of labor thrown in dustbin daily</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:3rem;margin-bottom:1rem;">💔🌏</div>
+            <h4 style="color:var(--warning);margin-bottom:0.5rem;">Our Planet</h4>
+            <p style="color:var(--text-light);">Dying slowly because of our carelessness</p>
+          </div>
         </div>
       </div>
     </section>
