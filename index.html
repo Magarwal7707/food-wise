@@ -642,19 +642,6 @@
       </div>
     </div>
   </div>
-
-  <div id="mealModal2" class="modal" role="dialog" aria-modal="true" aria-labelledby="mealModal2Title">
-    <div class="modal-content">
-      <button class="close" data-close="mealModal2">&times;</button>
-      <h3 id="mealModal2Title">Select the meal</h3>
-      <div class="modal-actions">
-        <button class="pill" data-meal2="Breakfast">Breakfast</button>
-        <button class="pill" data-meal2="Lunch">Lunch</button>
-        <button class="pill" data-meal2="Dinner">Dinner</button>
-      </div>
-    </div>
-  </div>
-
   <div id="menuHostelModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="menuHostelModalTitle">
     <div class="modal-content">
       <button class="close" data-close="menuHostelModal">&times;</button>
@@ -888,13 +875,33 @@
     };
 
     /* ---------- diet-chart flow ---------- */
+    const DIET_CHART_LINKS = {
+      high: {
+        Monday: 'https://drive.google.com/file/d/1b3plVG7X1BHpCaOCUsoa4lCjodQttolI/view?usp=drive_link',
+        Tuesday: 'https://drive.google.com/file/d/1RYodyctT_wkiCn6hd5e8A4MQ6GUTJXN-/view?usp=drive_link',
+        Wednesday: 'https://drive.google.com/file/d/1g7hEma1FQZxOpTepLy52LgZ0m1MJE9x6/view?usp=drive_link',
+        Thursday: 'https://drive.google.com/file/d/1Sbzc9YxanHaCN1AfhDtB4qwfUkdkgwrB/view?usp=drive_link',
+        Friday: 'https://drive.google.com/file/d/1rJgMyfRqAB_jCqPpkEoFXM0l_khHpYti/view?usp=drive_link',
+        Saturday: 'https://drive.google.com/file/d/1KP0T7_Ph7D8_sNZCtN4EkudrZft-jKDG/view?usp=drive_link',
+        Sunday: 'https://drive.google.com/file/d/1oDsw99kWv2jyCTtfww9SQf-Gl2ACbLpX/view?usp=drive_link'
+      },
+      low: {
+        Monday: 'https://drive.google.com/file/d/1TRaK5CK32s0QzpoUE0uXGiLUzDlAL8bt/view?usp=drive_link',
+        Tuesday: 'https://drive.google.com/file/d/1TRaK5CK32s0QzpoUE0uXGiLUzDlAL8bt/view?usp=drive_link',
+        Wednesday: 'https://drive.google.com/file/d/1bJTidg8CFs9www2a9ju6hq8Vs5-9Iimd/view?usp=drive_link',
+        Thursday: 'https://drive.google.com/file/d/1tmsLmC2cxied0za_5ko4AE52d8ui7pL1/view?usp=drive_link',
+        Friday: 'https://drive.google.com/file/d/1TRaK5CK32s0QzpoUE0uXGiLUzDlAL8bt/view?usp=drive_link',
+        Saturday: 'https://drive.google.com/file/d/1TRaK5CK32s0QzpoUE0uXGiLUzDlAL8bt/view?usp=drive_link',
+        Sunday: 'https://drive.google.com/file/d/1TRaK5CK32s0QzpoUE0uXGiLUzDlAL8bt/view?usp=drive_link'
+      }
+    };
+
     $('#dietBtn').onclick = () => openModal('dietModal');
     $$('[data-level]').forEach(btn => btn.onclick = () => {
       calorieLevel = btn.dataset.level;
       closeModal('dietModal');
       openModal('hostelModal2');
     });
-    /* --- NEW: hostel2 -> dayModal -> mealModal2 --- */
     $$('[data-hostel2]').forEach(btn => btn.onclick = () => {
       hostel = btn.dataset.hostel2;
       localStorage.setItem('fw-hostel', hostel);
@@ -902,15 +909,14 @@
       openModal('dayModal');
     });
     $$('[data-day]').forEach(btn => btn.onclick = () => {
-      window._dietDay = btn.dataset.day;
+      const chosenDay = btn.dataset.day;
       closeModal('dayModal');
-      openModal('mealModal2');
-    });
-    $$('[data-meal2]').forEach(btn => btn.onclick = () => {
-      const chosenMeal = btn.dataset.meal2;
-      closeModal('mealModal2');
-      const sheetId = calorieLevel === 'high' ? 'xxxHighSheet' : 'yyyLowSheet';
-      window.open(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:html&sheet=${chosenMeal}`, '_blank', 'noopener');
+      const driveLink = DIET_CHART_LINKS[calorieLevel][chosenDay];
+      if (driveLink) {
+        window.open(driveLink, '_blank', 'noopener');
+      } else {
+        alert('Diet chart not available for this selection.');
+      }
     });
 
     /* ---------- menu button ---------- */
