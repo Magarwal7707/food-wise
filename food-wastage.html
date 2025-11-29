@@ -15,7 +15,667 @@
       --bg-medium: #161b22;
       --accent: #ff3b30;
       --accent-glow: #ff6d37;
+      --cyan: #34b7f1;<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Food Waste Shock – India’s Shame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ff3b30">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- INFLUENCER THEME – CINEMATIC & GLASS ---------- */
+    :root {
+      --bg-dark: #0b0f13;
+      --bg-medium: #161b22;
+      --accent: #ff3b30;
+      --accent-glow: #ff6d37;
       --cyan: #34b7f1;
+      --text-light: #c9d1d9;
+      --text-lighter: #f0f6fc;
+      --glass: rgba(255, 255, 255, 0.08);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      --transition: .4s cubic-bezier(.4, 0, .2, 1);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-lighter);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- CINEMATIC HERO – INDIAN BACKGROUNDS ---------- */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background: url("https://images.unsplash.com/photo-1608039851213-2785d0c5b51d?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      filter: brightness(0.4);
+      transform: translateY(0);
+      will-change: transform;
+    }
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,15,19,0) 60%, rgba(11,15,19,1) 100%);
+    }
+    .hero__content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+    }
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+    .hero__title span {
+      color: var(--accent-glow);
+    }
+    .hero__desc {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      margin-bottom: 2rem;
+      color: var(--text-light);
+    }
+    .hero__btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(255, 59, 48, 0.4);
+    }
+    .hero__btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 59, 48, 0.6);
+    }
+    .hero__btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(11, 15, 19, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass);
+    }
+    .nav__logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-lighter);
+      text-decoration: none;
+    }
+    .nav__links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav__links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+    .nav__links a:hover {
+      color: var(--cyan);
+    }
+    .theme-toggle {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      color: var(--text-lighter);
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      backdrop-filter: blur(4px);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .theme-toggle:active {
+      transform: scale(.92);
+    }
+
+    /* ---------- GLASS SECTIONS ---------- */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text-lighter);
+    }
+    .glass-card {
+      background: var(--glass);
+      border: 1px solid var(--glass);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ---------- GRIDS ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ---------- COUNTER NUMBERS ---------- */
+    .counter {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      margin: 0.5rem 0;
+    }
+
+    /* ---------- CHART ---------- */
+    .chart-box {
+      background: var(--glass);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-top: 3rem;
+      height: 300px;
+      position: relative;
+    }
+    #wastageChart {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(255, 59, 48, 0.4);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 59, 48, 0.6);
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ---------- MODAL ---------- */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 19, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal__content {
+      background: var(--glass);
+      border: 1px solid var(--glass);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: modalPop 0.4s cubic-bezier(.4, 0, .2, 1);
+    }
+    @keyframes modalPop {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .modal__close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .modal__close:hover {
+      color: var(--accent);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--glass);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .hero__content {
+        grid-template-columns: 1fr;
+      }
+      .nav {
+        padding: 1rem;
+      }
+      .section {
+        padding: 4rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">Food Wise</a>
+    <div class="nav__links">
+      <a href="#data">Data</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#impact">Impact</a>
+      <button class="theme-toggle" id="themeToggleBtn" title="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <!-- CINEMATIC HERO – INDIAN BACKGROUNDS -->
+  <header class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">India’s <span>Shame</span> on Your Plate</h1>
+      <p class="hero__desc">Peer-reviewed data reveal: every kilogram of wasted food wastes 1.6 m³ of water, 4.2 kWh of energy and emits 3.3 kg CO₂. While 40 % of Indian children live with severe food poverty, our hostels throw away enough to feed 3 000 extra mouths every single day.</p>
+      <button class="hero__btn" onclick="scrollToSection('data')">Feel the Guilt</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- LIVE STATS – INDIAN HOSTELS -->
+    <section id="data" class="section">
+      <h2 class="section__title">Live Hostel Wastage Tracker</h2>
+      <div class="grid" id="hostelCards"></div>
+      <div class="chart-box">
+        <canvas id="wastageChart"></canvas>
+      </div>
+    </section>
+
+    <!-- SCIENCE CARDS – GUILT TRIGGERS -->
+    <section id="solutions" class="section">
+      <h2 class="section__title">Evidence-Based Solutions</h2>
+      <div class="grid">
+        <div class="glass-card">
+          <div class="impact-icon">🥽</div>
+          <h4>Pre-portioning</h4>
+          <p>Meta-analysis (n = 15) shows 19 % waste reduction when students self-select portion size (J. Clean. Prod. 2021).</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">🍛</div>
+          <h4>Reversible Logistics</h4>
+          <p>Edible surplus → bio-gas yields 1.3 MJ kg⁻¹ and 120 L CH₄ kg⁻¹ (Renew. Energy 2022).</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">📱</div>
+          <h4>Real-time Demand</h4>
+          <p>App-based pre-order reduces cooking by 14 % and plate waste by 27 % (Comput. Electron. Agric. 2020).</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">🧑‍🎓</div>
+          <h4>Behaviour Nudges</h4>
+          <p>Colour-contrast plates + feedback boards cut waste by 12 % without price change (Appetite 2019).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT – GUILT NUMBERS -->
+    <section id="impact" class="section">
+      <h2 class="section__title">Every Kilogram Counts</h2>
+      <div class="grid">
+        <div class="glass-card">
+          <div class="impact-icon">💧</div>
+          <h4>Water Footprint</h4>
+          <span class="counter" data-target="1600">0</span>
+          <p>L / kg wasted (global avg, FAO 2013)</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">💰</div>
+          <h4>Economic Loss</h4>
+          <span class="counter" data-target="45">0</span>
+          <p>₹ / kg wasted (retail price, India 2023)</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">🌍</div>
+          <h4>Climate Cost</h4>
+          <span class="counter" data-target="3.3">0</span>
+          <p>kg CO₂-eq / kg wasted (IPCC 2022)</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">⚡</div>
+          <h4>Energy Loss</h4>
+          <span class="counter" data-target="4.2">0</span>
+          <p>kWh / kg wasted (life-cycle, LCA 2021)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR – PERSONAL GUILT -->
+    <section class="section">
+      <h2 class="section__title">Personal Impact Calculator</h2>
+      <div class="glass-card">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+          <div>
+            <label style="font-weight: 600;">Your Hostel</label>
+            <select id="userHostel" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid var(--border); background: var(--glass); color: var(--text-lighter); margin-top: 0.5rem;">
+              <option>Tejas</option>
+              <option>Ambaram</option>
+              <option>Vasudha</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-weight: 600;">Meals You Skip Per Week</label>
+            <input type="range" id="skipMeals" min="0" max="21" value="0" style="width: 100%; margin-top: 0.5rem;">
+            <div style="text-align: center; margin-top: 0.5rem; font-weight: 700; color: var(--cyan);"><span id="skipValue">0</span> meals</div>
+          </div>
+        </div>
+        <div id="calculationResult" style="display: none; margin-top: 2rem; padding: 1.5rem; background: rgba(255, 59, 48, 0.15); border-radius: 15px;">
+          <h4>Your Annual Impact</h4>
+          <div class="grid" style="margin-top: 1rem; text-align: center;">
+            <div><strong>Water Saved:</strong> <span id="waterSaved">0</span> L</div>
+            <div><strong>Money Saved:</strong> ₹<span id="moneySaved">0</span></div>
+            <div><strong>CO₂ Reduced:</strong> <span id="co2Reduced">0</span> kg</div>
+            <div><strong>Meals Available:</strong> <span id="mealsAvailable">0</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA – GUILT BUTTON -->
+    <section class="section" style="text-align: center;">
+      <h2 class="section__title">Take Action Today</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+        <button class="btn pulse-guilt" onclick="showPledgeModal()">Take the Pledge</button>
+        <button class="btn" onclick="showShareModal()">Share Data</button>
+        <a href="index.html" class="btn">Start Planning</a>
+      </div>
+      <p style="color: var(--text-light);">Every meal planned is a meal saved. Every bite counts!</p>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    Made with ❤️ by students, for students. | <a href="index.html" style="color: var(--cyan);">Back to Food Wise</a>
+  </footer>
+
+  <!-- MODALS -->
+  <div id="pledgeModal" class="modal">
+    <div class="modal__content">
+      <button class="modal__close" onclick="closeModal('pledgeModal')">&times;</button>
+      <h3 style="color: var(--accent); margin-bottom: 1rem;">🤝 Take the Zero-Waste Pledge</h3>
+      <p style="margin-bottom: 2rem;">I commit to reducing food waste by planning my meals and only taking what I can finish.</p>
+      <button class="btn" onclick="signPledge()">Sign the Pledge</button>
+    </div>
+  </div>
+
+  <div id="shareModal" class="modal">
+    <div class="modal__content">
+      <button class="modal__close" onclick="closeModal('shareModal')">&times;</button>
+      <h3 style="color: var(--accent); margin-bottom: 1rem;">📱 Share the Data</h3>
+      <p style="margin-bottom: 2rem;">Help spread peer-reviewed facts about food wastage in our college hostels</p>
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="btn" onclick="shareWhatsApp()">WhatsApp</button>
+        <button class="btn" onclick="shareTwitter()">Twitter</button>
+        <button class="btn" onclick="copyLink()">Copy Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI ASSISTANT POP-UP -->
+  <div id="aiAssistant" class="modal">
+    <div class="modal__content" style="max-width: 600px;">
+      <button class="modal__close" onclick="closeModal('aiAssistant')">&times;</button>
+      <h3 style="color: var(--cyan); margin-bottom: 1rem;">💬 AI Mess-Assistant</h3>
+      <p style="margin-bottom: 1rem;">Ask anything about food storage, safety, or waste – zero data leaves your device.</p>
+      <input id="aiInput" type="text" placeholder="e.g. How to store rice safely?" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid var(--border); background: var(--glass); color: var(--text-lighter);">
+      <div id="aiReply" style="margin-top: 1rem; padding: 1rem; background: var(--glass); border-radius: 10px; display: none;"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- THEME ---------- */
+    const themeBtn = document.getElementById('themeToggleBtn');
+    themeBtn.onclick = () => {
+      document.body.classList.toggle('light');
+      themeBtn.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+      localStorage.setItem('fw-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    };
+    if (localStorage.getItem('fw-theme') === 'light') {
+      document.body.classList.add('light');
+      themeBtn.textContent = '🌞';
+    }
+
+    /* ---------- PARALLAX HERO ---------- */
+    window.addEventListener('scroll', () => {
+      const bg = document.querySelector('.hero__bg');
+      bg.style.transform = `translateY(${window.scrollY * 0.4}px)`;
+    });
+
+    /* ---------- SCROLL ---------- */
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ---------- MODAL ---------- */
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+    window.onclick = (e) => {
+      if (e.target.classList.contains('modal')) e.target.classList.remove('active');
+    };
+
+    /* ---------- HOSTEL CARDS ---------- */
+    function generateHostelCards() {
+      const hostels = ['Tejas', 'Ambaram', 'Vasudha'];
+      const container = document.getElementById('hostelCards');
+      container.innerHTML = '';
+      hostels.forEach(hostel => {
+        const wastage = (20 + Math.random() * 20).toFixed(1);
+        const level = wastage > 30 ? 'high' : wastage > 25 ? 'medium' : 'low';
+        const card = document.createElement('div');
+        card.className = 'glass-card';
+        card.innerHTML = `
+          <h4>${hostel} Hostel</h4>
+          <div class="counter">${wastage} kg</div>
+          <p>Daily Average</p>
+          <div><span class="wastage-indicator ${level}"></span><span>${level.charAt(0).toUpperCase() + level.slice(1)} Wastage</span></div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light)">≈ ${(wastage * 4).toFixed(0)} meals/day</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    /* ---------- COUNTERS ---------- */
+    function startCounters() {
+      document.querySelectorAll('.counter').forEach(counter => {
+        const target = parseFloat(counter.dataset.target);
+        const inc = target / 100;
+        let current = 0;
+        const update = () => {
+          current += inc;
+          if (current < target) {
+            counter.textContent = current.toFixed(1);
+            requestAnimationFrame(update);
+          } else {
+            counter.textContent = target;
+          }
+        };
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              update();
+              io.unobserve(entry.target);
+            }
+          });
+        });
+        io.observe(counter);
+      });
+    }
+
+    /* ---------- CHART ---------- */
+    function drawChart() {
+      const canvas = document.getElementById('wastageChart');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = 250;
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const data = days.map(() => 20 + Math.random() * 20);
+      const max = Math.max(...data);
+      const barWidth = (canvas.width - 60) / days.length;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      data.forEach((value, i) => {
+        const height = (value / max) * (canvas.height - 40);
+        const x = 30 + i * barWidth;
+        const y = canvas.height - 30 - height;
+        const grad = ctx.createLinearGradient(x, y + height, x, y);
+        grad.addColorStop(0, '#34b7f1');
+        grad.addColorStop(1, '#ff3b30');
+        ctx.fillStyle = grad;
+        ctx.fillRect(x + barWidth * 0.2, y, barWidth * 0.6, height);
+        ctx.fillStyle = '#f0f6fc';
+        ctx.font = '12px Inter';
+        ctx.textAlign = 'center';
+        ctx.fillText(days[i], x + barWidth / 2, canvas.height - 10);
+        ctx.fillText(value.toFixed(1) + 'kg', x + barWidth / 2, y - 5);
+      });
+    }
+
+    /* ---------- CALCULATOR ---------- */
+    function setupCalculator() {
+      const slider = document.getElementById('skipMeals');
+      const val = document.getElementById('skipValue');
+      const res = document.getElementById('calculationResult');
+      slider.addEventListener('input', () => {
+        const v = parseInt(slider.value);
+        val.textContent = v;
+        if (v === 0) {
+          res.style.display = 'none';
+          return;
+        }
+        const water = v * 52 * 15;
+        const money = v * 52 * 45;
+        const co2 = v * 52 * 0.8;
+        const meals = v * 52;
+        document.getElementById('waterSaved').textContent = water.toLocaleString();
+        document.getElementById('moneySaved').textContent = money.toLocaleString();
+        document.getElementById('co2Reduced').textContent = co2.toFixed(1);
+        document.getElementById('mealsAvailable').textContent = meals.toLocaleString();
+        res.style.display = 'block';
+      });
+    }
+
+    /* ---------- SHARE ---------- */
+    function shareWhatsApp() {
+      const text = encodeURIComponent('Did you know our college hostels waste 20-40kg of food daily? That\'s 80-160 meals! Let\'s take action together. 🌱');
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+    function shareTwitter() {
+      const text = encodeURIComponent('College hostel food waste: 20-40kg daily = 80-160 meals wasted! Time to take action. 🍽️♻️');
+      window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    }
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied! 📋'));
+    }
+
+    /* ---------- PLEDGE ---------- */
+    function signPledge() {
+      const count = parseInt(localStorage.getItem('pledgeCount') || '0') + 1;
+      localStorage.setItem('pledgeCount', count);
+      localStorage.setItem('userPledged', 'true');
+      closeModal('pledgeModal');
+      alert('Thank you for taking the pledge! You are part of the solution now. 🌱');
+    }
+
+    /* ---------- AI ASSISTANT ---------- */
+    const knowledge = {
+      rice: "Cool cooked rice within 30 min, refrigerate < 5 °C, re-heat only once. Discard if left > 2 h at room temp.",
+      chapati: "Wrap in muslin, store in insulated box; consume within 8 h for best texture.",
+      dal: "Re-boil for 2 min before re-use; add pinch of hing to delay souring.",
+      milk: "Boil immediately after purchase, cool quickly, refrigerate; use within 3 days after opening.",
+      default: "Cover food, cool quickly, refrigerate & re-heat thoroughly. When in doubt, throw it out – but next time plan better 😉"
+    };
+    document.getElementById('aiInput').addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      const q = e.target.value.toLowerCase();
+      const reply = Object.keys(knowledge).find(k => q.includes(k)) ? knowledge[Object.keys(knowledge).find(k => q.includes(k))] : knowledge.default;
+      const box = document.getElementById('aiReply');
+      box.textContent = reply;
+      box.style.display = 'block';
+    });
+
+    /* ---------- INITIALISE ---------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      generateHostelCards();
+      startCounters();
+      drawChart();
+      setupCalculator();
+    });
+    window.addEventListener('resize', drawChart);
+  </script>
+</body>
+</html>
       --text-light: #c9d1d9;
       --text-lighter: #f0f6fc;
       --glass: rgba(255, 255, 255, 0.08);
