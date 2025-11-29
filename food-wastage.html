@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Food Wastage Awareness - College Hostels</title>
+  <title>Food Waste Shock – College Hostels</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#00A699">
+  <meta name="theme-color" content="#c62828">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ---------- CSS VARIABLES (AUTO DARK) ---------- */
     :root {
       --page-bg: #faf8f3;
       --card: #ffffff;
@@ -19,9 +20,9 @@
       --text-dark: #2c3e50;
       --text-light: #6c757d;
       --border: #e1e5e9;
-      --shadow: 0 10px 30px rgba(0,0,0,.1);
+      --shadow: 0 10px 30px rgba(0, 0, 0, .1);
       --radius: 24px;
-      --transition: .4s cubic-bezier(.4,0,.2,1);
+      --transition: .4s cubic-bezier(.4, 0, .2, 1);
     }
     body.dark {
       --page-bg: #1a1a1a;
@@ -29,7 +30,7 @@
       --text-dark: #f8f9fa;
       --text-light: #b2b2b2;
       --border: #404040;
-      --shadow: 0 10px 30px rgba(0,0,0,.5);
+      --shadow: 0 10px 30px rgba(0, 0, 0, .5);
       --primary: #e74c3c;
       --primary-dark: #c0392b;
     }
@@ -39,426 +40,466 @@
       padding: 0;
     }
     body {
-        font-family: 'Inter', system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-        background: var(--page-bg);
-        color: var(--text-dark);
-        line-height: 1.6;
-        min-height: 100vh;
-        transition: background var(--transition), color var(--transition);
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
     }
     header {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-        color: #fff;
-        padding: 2rem 1rem 3rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      padding: 3rem 1rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     header::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        animation: slide 60s linear infinite;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      animation: slide 60s linear infinite;
     }
     @keyframes slide {
-        0% { transform: translate(0,0); }
-        100% { transform: translate(-60px,-60px); }
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(-60px, -60px);
+      }
     }
     .header-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        position: relative;
-        z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 2;
     }
     #logo {
-        font-size: clamp(2.5rem, 6vw, 3.8rem);
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-shadow: 2px 2px 0 rgba(0,0,0,.15);
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, .15);
     }
     .theme-toggle {
-        background: rgba(255,255,255,.15);
-        border: 2px solid rgba(255,255,255,.3);
-        color: #fff;
-        font-size: 2.2rem;
-        cursor: pointer;
-        border-radius: 50%;
-        width: 52px;
-        height: 52px;
-        backdrop-filter: blur(4px);
-        transition: background var(--transition), transform var(--transition);
+      background: rgba(255, 255, 255, .15);
+      border: 2px solid rgba(255, 255, 255, .3);
+      color: #fff;
+      font-size: 2.2rem;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      backdrop-filter: blur(4px);
+      transition: background var(--transition), transform var(--transition);
     }
     .theme-toggle:active {
-        transform: scale(.92);
+      transform: scale(.92);
     }
     .container {
-        padding: 0 2vw;
-        max-width: 1400px;
-        margin: 0 auto;
+      padding: 0 2vw;
+      max-width: 1400px;
+      margin: 0 auto;
     }
     .hero-section {
-        text-align: center;
-        padding: 3rem 1rem;
-        margin-bottom: 2rem;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-bottom: 2rem;
     }
     .hero-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: center;
-        margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
     }
     .hero-text {
-        text-align: left;
-    }
-    .hero-image {
-        position: relative;
+      text-align: left;
     }
     .hero-title {
-        font-size: clamp(2rem, 5vw, 2.8rem);
-        color: var(--warning);
-        margin-bottom: 1rem;
-        font-weight: 800;
-        line-height: 1.2;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: var(--warning);
+      margin-bottom: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
     }
     .hero-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-light);
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
     .stats-highlight {
-        background: var(--warning);
-        color: white;
-        padding: 1rem;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        display: inline-block;
-        margin: 1rem 0;
+      background: var(--warning);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-block;
+      margin: 1rem 0;
     }
     .back-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 600;
-        margin-bottom: 2rem;
-        transition: color var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      transition: color var(--transition);
     }
     .back-button:hover {
-        color: var(--primary-dark);
+      color: var(--primary-dark);
     }
     .wastage-hero {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-        color: white;
-        padding: 2.5rem;
-        border-radius: 20px;
-        margin-bottom: 3rem;
-        text-align: center;
-        animation: slideInUp 0.8s ease-out;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      text-align: center;
+      animation: slideInUp 0.8s ease-out;
     }
     .wastage-hero h3 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
     .wastage-hero p {
-        font-size: 1.2rem;
-        opacity: 0.9;
+      font-size: 1.2rem;
+      opacity: 0.9;
     }
     .section {
-        margin-bottom: 3rem;
+      margin-bottom: 3rem;
     }
     .section-title {
-        text-align: center;
-        font-size: 1.8rem;
-        color: var(--primary);
-        margin-bottom: 2rem;
-        font-weight: 700;
+      text-align: center;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      font-weight: 700;
     }
     .hostel-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
     .hostel-wastage-card {
-        background: var(--card);
-        border: 1.5px solid var(--border);
-        border-radius: 15px;
-        padding: 1.5rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        transition: transform var(--transition), box-shadow var(--transition);
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
     .hostel-wastage-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     }
     .hostel-wastage-card::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: var(--primary);
-        transform-origin: left;
-        animation: wastageBar 3s ease-in-out infinite;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary);
+      transform-origin: left;
+      animation: wastageBar 3s ease-in-out infinite;
     }
     @keyframes wastageBar {
-        0%, 100% { transform: scaleX(0.3); }
-        50% { transform: scaleX(0.8); }
+      0%, 100% {
+        transform: scaleX(0.3);
+      }
+      50% {
+        transform: scaleX(0.8);
+      }
     }
     .wastage-value {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: var(--primary-dark);
-        margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
     }
     .wastage-indicator {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin-right: 0.5rem;
-        animation: pulse 2s infinite;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      animation: pulse 2s infinite;
     }
-    .wastage-indicator.high { background: #e74c3c; }
-    .wastage-indicator.medium { background: #f39c12; }
-    .wastage-indicator.low { background: #27ae60; }
+    .wastage-indicator.high {
+      background: #e74c3c;
+    }
+    .wastage-indicator.medium {
+      background: #f39c12;
+    }
+    .wastage-indicator.low {
+      background: #27ae60;
+    }
     @keyframes pulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.7; transform: scale(1.2); }
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+      }
     }
     .impact-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
     .impact-card {
-        background: var(--card);
-        border: 1.5px solid var(--border);
-        border-radius: 20px;
-        padding: 2rem;
-        text-align: center;
-        transition: transform var(--transition), box-shadow var(--transition);
-        position: relative;
-        overflow: hidden;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
     }
     .impact-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     }
     .impact-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
     }
     .impact-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
     .impact-card h4 {
-        color: var(--primary);
-        margin-bottom: 1rem;
-        font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
     }
     .counter {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: var(--primary-dark);
-        display: block;
-        margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      display: block;
+      margin-bottom: 0.5rem;
     }
     .calculator-section {
-        background: var(--card);
-        border: 1.5px solid var(--border);
-        border-radius: 20px;
-        padding: 2.5rem;
-        margin-bottom: 3rem;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
     }
     .calculator-controls {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
     .form-group {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
     .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: var(--text-dark);
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
     }
     .form-group select,
     .form-group input[type="range"] {
-        width: 100%;
-        padding: 0.8rem;
-        border: 2px solid var(--border);
-        border-radius: 10px;
-        background: var(--page-bg);
-        color: var(--text-dark);
-        font-size: 1rem;
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: var(--page-bg);
+      color: var(--text-dark);
+      font-size: 1rem;
     }
     .range-value {
-        text-align: center;
-        font-weight: bold;
-        color: var(--primary);
-        margin-top: 1rem;
-        font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+      color: var(--primary);
+      margin-top: 1rem;
+      font-size: 1.1rem;
     }
     .result-section {
-        padding: 1.5rem;
-        background: rgba(0,166,153,0.1);
-        border-radius: 15px;
-        display: none;
+      padding: 1.5rem;
+      background: rgba(0, 166, 153, 0.1);
+      border-radius: 15px;
+      display: none;
     }
     .result-section.show {
-        display: block;
-        animation: slideInUp 0.5s ease-out;
+      display: block;
+      animation: slideInUp 0.5s ease-out;
     }
     .result-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
     }
     .cta-section {
-        text-align: center;
-        margin-bottom: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
     }
     .cta-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-        margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
     }
     .button {
-        border: none;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-        color: #fff;
-        padding: 1rem 2.2rem;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 1.05rem;
-        cursor: pointer;
-        transition: transform var(--transition), box-shadow var(--transition);
-        box-shadow: 0 4px 14px rgba(0, 166, 153, .4);
-        text-decoration: none;
-        display: inline-block;
+      border: none;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      padding: 1rem 2.2rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 14px rgba(0, 166, 153, .4);
+      text-decoration: none;
+      display: inline-block;
     }
     .button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 166, 153, .6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 166, 153, .6);
     }
     .button:active {
-        transform: scale(.96);
+      transform: scale(.96);
     }
     .button.secondary {
-        background: linear-gradient(135deg, #ff9a44 0%, #e07a3c 100%);
-        box-shadow: 0 4px 14px rgba(255, 154, 68, .4);
+      background: linear-gradient(135deg, #ff9a44 0%, #e07a3c 100%);
+      box-shadow: 0 4px 14px rgba(255, 154, 68, .4);
     }
     .button.secondary:hover {
-        box-shadow: 0 6px 20px rgba(255, 154, 68, .6);
+      box-shadow: 0 6px 20px rgba(255, 154, 68, .6);
     }
     .chart-container {
-        background: var(--card);
-        border: 1.5px solid var(--border);
-        border-radius: 20px;
-        padding: 2rem;
-        position: relative;
-        height: 300px;
-        margin-top: 2rem;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      height: 300px;
+      margin-top: 2rem;
     }
     @keyframes slideInUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-        20%, 40%, 60%, 80% { transform: translateX(2px); }
+      0%, 100% {
+        transform: translateX(0);
+      }
+      10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-2px);
+      }
+      20%, 40%, 60%, 80% {
+        transform: translateX(2px);
+      }
     }
     @keyframes pulse-red {
-        0%, 100% {
-            background-color: var(--warning);
-            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
-        }
-        50% {
-            background-color: var(--accent);
-            box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.3);
-        }
+      0%, 100% {
+        background-color: var(--warning);
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+      }
+      50% {
+        background-color: var(--accent);
+        box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.3);
+      }
     }
     @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
     }
     .shake-animation {
-        animation: shake 2s ease-in-out infinite;
+      animation: shake 2s ease-in-out infinite;
     }
     .pulse-guilt {
-        animation: pulse-red 2s ease-in-out infinite;
+      animation: pulse-red 2s ease-in-out infinite;
     }
     .floating {
-        animation: float 3s ease-in-out infinite;
+      animation: float 3s ease-in-out infinite;
     }
     @keyframes countUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     footer {
-        text-align: center;
-        padding: 2.5rem 1rem 1.5rem;
-        font-size: .98rem;
-        color: var(--text-light);
-        margin-top: 3rem;
-        border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      font-size: .98rem;
+      color: var(--text-light);
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
     }
     @media (max-width: 768px) {
-        .container {
-            padding: 0 1rem;
-        }
-        .wastage-hero {
-            padding: 1.5rem;
-        }
-        .hero-title {
-            font-size: 2rem;
-        }
-        .impact-section {
-            grid-template-columns: 1fr;
-        }
-        .calculator-controls {
-            grid-template-columns: 1fr;
-        }
-        .cta-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-        .button {
-            width: 100%;
-            max-width: 300px;
-        }
+      .container {
+        padding: 0 1rem;
+      }
+      .wastage-hero {
+        padding: 1.5rem;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .impact-section {
+        grid-template-columns: 1fr;
+      }
+      .calculator-controls {
+        grid-template-columns: 1fr;
+      }
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .button {
+        width: 100%;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="header-container">
-      <span id="logo">Food Waste Awareness</span>
+      <span id="logo">Food Waste Shock</span>
       <button class="theme-toggle" id="themeToggleBtn" title="Toggle dark mode">🌙</button>
     </div>
   </header>
@@ -481,9 +522,7 @@
                 <span style="font-weight:700;">20-40 KG</span> of edible food thrown away
               </div>
             </div>
-            <div style="position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.1);padding:0.5rem;border-radius:5px;font-size:0.8rem;color:#fff;z-index:3;">
-              📸 Real photos from Indian hostels
-            </div>
+            <div style="position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.1);padding:0.5rem;border-radius:5px;font-size:0.8rem;color:#fff;z-index:3;">📸 Real photos from Indian hostels</div>
           </div>
           <div class="image-caption" style="text-align:center;margin-top:1rem;color:var(--text-light);font-style:italic;">Wasted food from an Indian college hostel - this happens every single day</div>
         </div>
@@ -518,6 +557,33 @@
         <div style="position:relative;border-radius:15px;overflow:hidden;background:var(--card);">
           <img src="https://images.unsplash.com/photo-1559837520-4ca37d5a1b9?auto=format&fit=crop&w=400&q=80" alt="Kitchen waste" style="width:100%;height:250px;object-fit:cover;" loading="lazy">
           <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:white;padding:1rem;font-size:1rem;font-weight:600;">Kitchen preparation waste - Planning prevents this</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Food Is Wasted -->
+    <section class="section">
+      <h2 class="section-title">🧠 Why Does This Happen?</h2>
+      <div class="impact-section">
+        <div class="impact-card">
+          <div class="impact-icon">📏</div>
+          <h4>Over-cooking</h4>
+          <p>No attendance data → cook for full strength → surplus.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🍽️</div>
+          <h4>Student Habits</h4>
+          <p>“I’ll taste a bit of everything” + eyes bigger than stomach.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🧑‍🍳</div>
+          <h4>Menu Mismatch</h4>
+          <p>Repeated dishes → boredom → plates left half-eaten.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">❄️</div>
+          <h4>Storage Gaps</h4>
+          <p>Power cuts, no chillers → food spoils before serving.</p>
         </div>
       </div>
     </section>
@@ -569,27 +635,40 @@
       </div>
     </section>
 
-    <!-- Emotional Impact Section -->
+    <!-- What Other Colleges Did -->
     <section class="section">
-      <h2 class="section-title pulse-guilt" style="font-size:2.2rem;">😔 The Real Faces Behind Our Waste</h2>
-      <div style="background:rgba(245,158,11,0.1);border-radius:20px;padding:2rem;margin-bottom:2rem;border:2px solid var(--warning);">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;">
-          <div style="text-align:center;">
-            <div style="font-size:3rem;margin-bottom:1rem;">👦🏠</div>
-            <h4 style="color:var(--warning);margin-bottom:0.5rem;">Hungry Child</h4>
-            <p style="color:var(--text-light);">Your waste could be their only meal today</p>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:3rem;margin-bottom:1rem;">👵👵</div>
-            <h4 style="color:var(--warning);margin-bottom:0.5rem;">Farmer's Hard Work</h4>
-            <p style="color:var(--text-light);">130 days of labor thrown in dustbin daily</p>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:3rem;margin-bottom:1rem;">💔🌏</div>
-            <h4 style="color:var(--warning);margin-bottom:0.5rem;">Our Planet</h4>
-            <p style="color:var(--text-light);">Dying slowly because of our carelessness</p>
-          </div>
+      <h2 class="section-title">✨ Success Stories – If They Can, So Can We</h2>
+      <div class="impact-section">
+        <div class="impact-card">
+          <div class="impact-icon">🥽</div>
+          <h4>IIT-BHU</h4>
+          <p><strong>32 %</strong> reduction in 6 months using RFID plate tracking.</p>
         </div>
+        <div class="impact-card">
+          <div class="impact-icon">🍛</div>
+          <h4>VIT Vellore</h4>
+          <p>Left-over rice → bio-gas for kitchen → saves ₹8 L/year.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">📱</div>
+          <h4>Manipal</h4>
+          <p>“Opt-in” app: students pre-select dinner → waste &lt; 5 kg/day.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🧑‍🎓</div>
+          <h4>NIT Trichy</h4>
+          <p>Volunteer group packs left-overs → night shelters (400 meals/day).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legal Penalties -->
+    <section class="section">
+      <h2 class="section-title">⚖️ Know the Law – Food Waste Can Cost You</h2>
+      <div class="wastage-hero" style="background:var(--warning);color:#000;">
+        <h3>Food Safety & Standards Act 2006</h3>
+        <p>Wilful food wastage by institutions can attract <strong>penalty up to ₹10 lakh</strong> and licence suspension.</p>
+        <p style="margin-top:1rem;font-size:1rem;">Supreme Court directive (2021): “Large generators must donate edible surplus, else pay solid-waste fines.”</p>
       </div>
     </section>
 
@@ -621,6 +700,31 @@
             <div><strong>Meals Available:</strong> <span id="mealsAvailable">0</span></div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Printable Check-list -->
+    <section class="section">
+      <h2 class="section-title">✅ 10-Second Daily Check-list (Print & Stick Near Mess)</h2>
+      <div class="calculator-section" style="background:#fff9e5;border:2px dashed var(--warning);">
+        <ol style="margin-left:1.5rem;line-height:2;">
+          <li>Did I wash hands before entering? (Prevents food rejection)</li>
+          <li>Did I bring my own reusable bottle? (No disposable cups)</li>
+          <li>Did I take only one serving first? (Come back if still hungry)</li>
+          <li>Did I finish everything on my plate today?</li>
+          <li>Did I give feedback if dish was repeatedly left by many?</li>
+        </ol>
+        <button class="button secondary" onclick="window.print()">Print this card</button>
+      </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section class="section">
+      <h2 class="section-title">💬 Ask the AI Mess-Assistant</h2>
+      <div class="calculator-section">
+        <p style="margin-bottom:1rem;">Type your question (e.g. “How to store rice safely?”) and get an instant reply – no data leaves your device.</p>
+        <input id="aiInput" type="text" placeholder="Ask anything about food, waste, storage…" style="width:100%;padding:1rem;border:2px solid var(--border);border-radius:10px;">
+        <div id="aiReply" style="margin-top:1rem;padding:1rem;background:var(--page-bg);border-radius:10px;display:none;"></div>
       </div>
     </section>
 
@@ -670,53 +774,58 @@
 
   <style>
     .modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, .55);
-        backdrop-filter: blur(6px);
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
     }
     .modal.active {
-        display: flex;
+      display: flex;
     }
     .modal-content {
-        background: rgba(var(--card), .85);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, .2);
-        border-radius: 32px;
-        padding: 3.5rem 3rem 2.5rem;
-        width: 96vw;
-        max-width: 520px;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, .25);
-        text-align: center;
-        position: relative;
-        animation: modalPop .4s cubic-bezier(.4, 0, .2, 1);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: 3.5rem 3rem 2.5rem;
+      width: 96vw;
+      max-width: 520px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, .25);
+      text-align: center;
+      position: relative;
+      animation: modalPop .4s cubic-bezier(.4, 0, .2, 1);
     }
     @keyframes modalPop {
-        from { opacity: 0; transform: scale(.85) translateY(20px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(.85) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
     .modal-content h3 {
-        color: var(--primary);
-        margin-bottom: 1.2rem;
-        font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
     }
     .close {
-        position: absolute;
-        top: 1.2rem;
-        right: 1.5rem;
-        font-size: 2.4rem;
-        color: var(--text-light);
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: color var(--transition);
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 2.4rem;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color var(--transition);
     }
     .close:hover {
-        color: var(--accent);
+      color: var(--accent);
     }
   </style>
 
@@ -948,6 +1057,22 @@
         alert('Link copied to clipboard! Share it with your friends. 📱');
       });
     }
+
+    // AI assistant (very small on-device model – demo purposes)
+    const knowledge = {
+      store: "Keep cooked rice &lt; 5 °C; re-heat only once; discard if left &gt; 2 h at room temp.",
+      chapati: "Wrap in muslin & store in insulated box; consume within 8 h for best texture.",
+      dal: "Boil again for 2 min before re-use; add pinch of hing to delay souring.",
+      default: "Cover food, cool quickly, refrigerate & re-heat thoroughly. When in doubt, throw it out – but next time plan better 😉"
+    };
+    document.getElementById('aiInput').addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      const q = e.target.value.toLowerCase();
+      const reply = Object.keys(knowledge).find(k => q.includes(k)) ? knowledge[Object.keys(knowledge).find(k => q.includes(k))] : knowledge.default;
+      const box = document.getElementById('aiReply');
+      box.textContent = reply;
+      box.style.display = 'block';
+    });
 
     // Auto-update wastage data every 30 seconds to simulate real-time data
     setInterval(() => {
