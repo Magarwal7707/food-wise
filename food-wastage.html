@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-utf-8">
+  <meta charset="utf-8">
   <title>Food Waste Shock – Influencer Edition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ff3b30">
@@ -427,7 +427,7 @@
     <section class="section" style="text-align: center;">
       <h2 class="section__title">Take Action Today</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
-        <button class="btn" onclick="showPledgeModal()">Take the Pledge</button>
+        <button class="btn pulse-guilt" onclick="showPledgeModal()">Take the Pledge</button>
         <button class="btn" onclick="showShareModal()">Share Data</button>
         <a href="index.html" class="btn">Start Planning</a>
       </div>
@@ -460,6 +460,17 @@
         <button class="btn" onclick="shareTwitter()">Twitter</button>
         <button class="btn" onclick="copyLink()">Copy Link</button>
       </div>
+    </div>
+  </div>
+
+  <!-- AI ASSISTANT POP-UP -->
+  <div id="aiAssistant" class="modal">
+    <div class="modal__content" style="max-width: 600px;">
+      <button class="modal__close" onclick="closeModal('aiAssistant')">&times;</button>
+      <h3 style="color: var(--cyan); margin-bottom: 1rem;">💬 AI Mess-Assistant</h3>
+      <p style="margin-bottom: 1rem;">Ask anything about food storage, safety, or waste – zero data leaves your device.</p>
+      <input id="aiInput" type="text" placeholder="e.g. How to store rice safely?" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid var(--border); background: var(--glass); color: var(--text-lighter);">
+      <div id="aiReply" style="margin-top: 1rem; padding: 1rem; background: var(--glass); border-radius: 10px; display: none;"></div>
     </div>
   </div>
 
@@ -619,6 +630,23 @@
       closeModal('pledgeModal');
       alert('Thank you for taking the pledge! You are part of the solution now. 🌱');
     }
+
+    /* ---------- AI ASSISTANT ---------- */
+    const knowledge = {
+      rice: "Cool cooked rice within 30 min, refrigerate < 5 °C, re-heat only once. Discard if left > 2 h at room temp.",
+      chapati: "Wrap in muslin, store in insulated box; consume within 8 h for best texture.",
+      dal: "Re-boil for 2 min before re-use; add pinch of hing to delay souring.",
+      milk: "Boil immediately after purchase, cool quickly, refrigerate; use within 3 days after opening.",
+      default: "Cover food, cool quickly, refrigerate & re-heat thoroughly. When in doubt, throw it out – but next time plan better 😉"
+    };
+    document.getElementById('aiInput').addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      const q = e.target.value.toLowerCase();
+      const reply = Object.keys(knowledge).find(k => q.includes(k)) ? knowledge[Object.keys(knowledge).find(k => q.includes(k))] : knowledge.default;
+      const box = document.getElementById('aiReply');
+      box.textContent = reply;
+      box.style.display = 'block';
+    });
 
     /* ---------- INITIALISE ---------- */
     window.addEventListener('DOMContentLoaded', () => {
