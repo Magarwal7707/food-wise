@@ -1,641 +1,359 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Food Waste Science – College Hostels</title>
+  <meta charset="utf-utf-8">
+  <title>Food Waste Shock – Influencer Edition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#06b6d4">
+  <meta name="theme-color" content="#ff3b30">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------- MODERN COLD GLASS THEME ---------- */
+    /* ---------- INFLUENCER THEME – CINEMATIC & GLASS ---------- */
     :root {
-      --page-bg: #f0f9ff;
-      --card: rgba(255, 255, 255, 0.65);
-      --primary: #06b6d4;
-      --primary-dark: #0891b2;
-      --accent: #0ea5e9;
-      --warning: #f59e0b;
-      --text-dark: #0f172a;
-      --text-light: #475569;
-      --border: rgba(203, 213, 225, 0.4);
-      --shadow: 0 8px 32px rgba(7, 105, 125, 0.15);
-      --radius: 24px;
+      --bg-dark: #0b0f13;
+      --bg-medium: #161b22;
+      --accent: #ff3b30;
+      --accent-glow: #ff6d37;
+      --cyan: #34b7f1;
+      --text-light: #c9d1d9;
+      --text-lighter: #f0f6fc;
+      --glass: rgba(255, 255, 255, 0.08);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
       --transition: .4s cubic-bezier(.4, 0, .2, 1);
-    }
-    body.dark {
-      --page-bg: #0f172a;
-      --card: rgba(30, 41, 59, 0.7);
-      --text-dark: #f1f5f9;
-      --text-light: #cbd5e1;
-      --border: rgba(71, 85, 105, 0.4);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--page-bg);
-      color: var(--text-dark);
+      background: var(--bg-dark);
+      color: var(--text-lighter);
       line-height: 1.6;
-      min-height: 100vh;
-      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
     }
-    header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #fff;
-      padding: 3rem 1rem 4rem;
-      text-align: center;
+
+    /* ---------- CINEMATIC HERO ---------- */
+    .hero {
+      height: 100vh;
       position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      animation: slide 60s linear infinite;
-    }
-    @keyframes slide {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(-60px, -60px);
-      }
-    }
-    .header-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.5rem;
-      position: relative;
-      z-index: 2;
+      text-align: center;
+      padding: 2rem;
     }
-    #logo {
-      font-size: clamp(2.5rem, 6vw, 3.8rem);
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background: url("https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      filter: brightness(0.4);
+      transform: translateY(0);
+      will-change: transform;
+    }
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,15,19,0) 60%, rgba(11,15,19,1) 100%);
+    }
+    .hero__content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+    }
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 800;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 0 rgba(0, 0, 0, .15);
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+    .hero__title span {
+      color: var(--accent-glow);
+    }
+    .hero__desc {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      margin-bottom: 2rem;
+      color: var(--text-light);
+    }
+    .hero__btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(255, 59, 48, 0.4);
+    }
+    .hero__btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 59, 48, 0.6);
+    }
+    .hero__btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(11, 15, 19, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass);
+    }
+    .nav__logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-lighter);
+      text-decoration: none;
+    }
+    .nav__links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav__links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+    .nav__links a:hover {
+      color: var(--cyan);
     }
     .theme-toggle {
-      background: rgba(255, 255, 255, .15);
-      border: 2px solid rgba(255, 255, 255, .3);
-      color: #fff;
-      font-size: 2.2rem;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      color: var(--text-lighter);
+      font-size: 1.5rem;
       cursor: pointer;
       border-radius: 50%;
-      width: 52px;
-      height: 52px;
+      width: 42px;
+      height: 42px;
       backdrop-filter: blur(4px);
       transition: background var(--transition), transform var(--transition);
     }
     .theme-toggle:active {
       transform: scale(.92);
     }
-    .container {
-      padding: 0 2vw;
-      max-width: 1400px;
+
+    /* ---------- GLASS SECTIONS ---------- */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
       margin: 0 auto;
     }
-    .hero-section {
-      text-align: center;
-      padding: 3rem 1rem;
-      margin-bottom: 2rem;
-    }
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    .hero-text {
-      text-align: left;
-    }
-    .hero-title {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      color: var(--warning);
-      margin-bottom: 1rem;
+    .section__title {
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 800;
-      line-height: 1.2;
-    }
-    .hero-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-light);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-    .stats-highlight {
-      background: var(--warning);
-      color: white;
-      padding: 1rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      display: inline-block;
-      margin: 1rem 0;
-    }
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      transition: color var(--transition);
-    }
-    .back-button:hover {
-      color: var(--primary-dark);
-    }
-    .wastage-hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 2.5rem;
-      border-radius: 20px;
-      margin-bottom: 3rem;
       text-align: center;
-      animation: slideInUp 0.8s ease-out;
-    }
-    .wastage-hero h3 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .wastage-hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-    .section {
       margin-bottom: 3rem;
+      color: var(--text-lighter);
     }
-    .section-title {
-      text-align: center;
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 2rem;
-      font-weight: 700;
+    .glass-card {
+      background: var(--glass);
+      border: 1px solid var(--glass);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    .hostel-cards {
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ---------- GRIDS ---------- */
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      gap: 2rem;
     }
-    .hostel-wastage-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 15px;
-      padding: 1.5rem;
-      text-align: center;
+
+    /* ---------- COUNTER NUMBERS ---------- */
+    .counter {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      margin: 0.5rem 0;
+    }
+
+    /* ---------- CHART ---------- */
+    .chart-box {
+      background: var(--glass);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-top: 3rem;
+      height: 300px;
       position: relative;
-      overflow: hidden;
+    }
+    #wastageChart {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
       transition: transform var(--transition), box-shadow var(--transition);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(255, 59, 48, 0.4);
     }
-    .hostel-wastage-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 59, 48, 0.6);
     }
-    .hostel-wastage-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--primary);
-      transform-origin: left;
-      animation: wastageBar 3s ease-in-out infinite;
+    .btn:active {
+      transform: scale(0.97);
     }
-    @keyframes wastageBar {
-      0%, 100% {
-        transform: scaleX(0.3);
+
+    /* ---------- MODAL ---------- */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 19, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal__content {
+      background: var(--glass);
+      border: 1px solid var(--glass);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      animation: modalPop 0.4s cubic-bezier(.4, 0, .2, 1);
+    }
+    @keyframes modalPop {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
       }
-      50% {
-        transform: scaleX(0.8);
-      }
-    }
-    .wastage-value {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--primary-dark);
-      margin-bottom: 0.5rem;
-    }
-    .wastage-indicator {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      margin-right: 0.5rem;
-      animation: pulse 2s infinite;
-    }
-    .wastage-indicator.high {
-      background: #e74c3c;
-    }
-    .wastage-indicator.medium {
-      background: #f39c12;
-    }
-    .wastage-indicator.low {
-      background: #27ae60;
-    }
-    @keyframes pulse {
-      0%, 100% {
+      to {
         opacity: 1;
         transform: scale(1);
       }
-      50% {
-        opacity: 0.7;
-        transform: scale(1.2);
-      }
     }
-    .impact-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .impact-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform var(--transition), box-shadow var(--transition);
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-    }
-    .impact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    }
-    .impact-card::before {
-      content: '';
+    .modal__close {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-    }
-    .impact-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .impact-card h4 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-    .counter {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--primary-dark);
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .calculator-section {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
-      backdrop-filter: blur(10px);
-    }
-    .calculator-controls {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: var(--text-dark);
-    }
-    .form-group select,
-    .form-group input[type="range"] {
-      width: 100%;
-      padding: 0.8rem;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      background: var(--page-bg);
-      color: var(--text-dark);
-      font-size: 1rem;
-    }
-    .range-value {
-      text-align: center;
-      font-weight: bold;
-      color: var(--primary);
-      margin-top: 1rem;
-      font-size: 1.1rem;
-    }
-    .result-section {
-      padding: 1.5rem;
-      background: rgba(0, 166, 153, 0.1);
-      border-radius: 15px;
-      display: none;
-    }
-    .result-section.show {
-      display: block;
-      animation: slideInUp 0.5s ease-out;
-    }
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .cta-section {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .cta-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .button {
-      border: none;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #fff;
-      padding: 1rem 2.2rem;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1.05rem;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: var(--text-light);
       cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 4px 14px rgba(0, 166, 153, .4);
-      text-decoration: none;
-      display: inline-block;
+      transition: color var(--transition);
     }
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 166, 153, .6);
+    .modal__close:hover {
+      color: var(--accent);
     }
-    .button:active {
-      transform: scale(.96);
-    }
-    .button.secondary {
-      background: linear-gradient(135deg, #ff9a44 0%, #e07a3c 100%);
-      box-shadow: 0 4px 14px rgba(255, 154, 68, .4);
-    }
-    .button.secondary:hover {
-      box-shadow: 0 6px 20px rgba(255, 154, 68, .6);
-    }
-    .chart-container {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-      position: relative;
-      height: 300px;
-      margin-top: 2rem;
-    }
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes shake {
-      0%, 100% {
-        transform: translateX(0);
-      }
-      10%, 30%, 50%, 70%, 90% {
-        transform: translateX(-2px);
-      }
-      20%, 40%, 60%, 80% {
-        transform: translateX(2px);
-      }
-    }
-    @keyframes pulse-red {
-      0%, 100% {
-        background-color: var(--warning);
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
-      }
-      50% {
-        background-color: var(--accent);
-        box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.3);
-      }
-    }
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-    .shake-animation {
-      animation: shake 2s ease-in-out infinite;
-    }
-    .pulse-guilt {
-      animation: pulse-red 2s ease-in-out infinite;
-    }
-    .floating {
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes countUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+
+    /* ---------- FOOTER ---------- */
     footer {
       text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-      font-size: .98rem;
+      padding: 3rem 2rem;
+      font-size: 0.9rem;
       color: var(--text-light);
-      margin-top: 3rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--glass);
     }
+
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 768px) {
-      .container {
-        padding: 0 1rem;
-      }
-      .wastage-hero {
-        padding: 1.5rem;
-      }
-      .hero-title {
-        font-size: 2rem;
-      }
-      .impact-section {
+      .hero__content {
         grid-template-columns: 1fr;
       }
-      .calculator-controls {
-        grid-template-columns: 1fr;
+      .nav {
+        padding: 1rem;
       }
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      .button {
-        width: 100%;
-        max-width: 300px;
+      .section {
+        padding: 4rem 1rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="header-container">
-      <span id="logo">Food Waste Science</span>
-      <button class="theme-toggle" id="themeToggleBtn" title="Toggle dark mode">🌙</button>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">Food Wise</a>
+    <div class="nav__links">
+      <a href="#data">Data</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#impact">Impact</a>
+      <button class="theme-toggle" id="themeToggleBtn" title="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <!-- CINEMATIC HERO -->
+  <header class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">The Hard <span>Science</span> Behind Our Waste</h1>
+      <p class="hero__desc">Peer-reviewed data reveal: every kilogram of wasted food wastes 1.6 m³ of water, 4.2 kWh of energy and emits 3.3 kg CO₂. Let's quantify the damage and fix it.</p>
+      <button class="hero__btn" onclick="scrollToSection('data')">See the Numbers</button>
     </div>
   </header>
 
-  <main class="container">
-    <div class="hero-section">
-      <a href="index.html" class="back-button">← Back to Food Wise</a>
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1 class="hero-title">The Hard Science Behind Our Waste</h1>
-          <p class="hero-subtitle">Peer-reviewed data reveal: every kilogram of wasted food wastes 1.6 m³ of water, 4.2 kWh of energy and emits 3.3 kg CO₂. Let's quantify the damage and fix it.</p>
-        </div>
-        <div class="hero-image">
-          <div style="position:relative;width:100%;height:300px;background:linear-gradient(45deg,#0f172a,#1e293b);border-radius:15px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);z-index:1;"></div>
-            <div style="color:#fff;font-size:1.2rem;font-weight:600;text-align:center;padding:2rem;z-index:2;">
-              <div style="font-size:3rem;margin-bottom:1rem;animation:floating 3s ease-in-out infinite;">🧪</div>
-              <div style="font-size:1.1rem;margin-bottom:1rem;">EVERY 1 kg WASTED =</div>
-              <div style="background:rgba(6,182,212,0.9);padding:0.5rem 1rem;border-radius:8px;display:inline-block;">
-                <span style="font-weight:700;">3.3 kg CO₂</span> + 1600 L water
-              </div>
-            </div>
-            <div style="position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.1);padding:0.5rem;border-radius:5px;font-size:0.8rem;color:#fff;z-index:3;">Source: FAO 2013</div>
-          </div>
-          <div class="image-caption" style="text-align:center;margin-top:1rem;color:var(--text-light);font-style:italic;">Life-cycle impacts of wasted food (cradle to grave)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hero Statistics Section -->
-    <div class="wastage-hero">
-      <h3>🌍 <span class="stats-highlight">931 Mt</span> Global Food Waste / yr (UNEP 2021)</h3>
-      <p style="font-size:1.3rem;margin-bottom:1rem;">Indian hostels add ≈ <span id="dailyMeals">240-480</span> plates/day to this pile – enough to feed 3 000 extra students.</p>
-      <div style="background:rgba(0,0,0,0.1);border-radius:12px;padding:1.5rem;margin-top:1.5rem;">
-        <h4 style="color:var(--warning);margin-bottom:0.8rem;">😔 Peer-reviewed Facts:</h4>
-        <p style="margin:0.5rem 0;font-size:1rem;">• <strong>8-10 %</strong> of global GHG emissions stem from food that is produced but not eaten (IPCC 2022)</p>
-        <p style="margin:0.5rem 0;font-size:1rem;">• <strong>1.4 B ha</strong> of land – 28 % world agri-area – is used to grow food that is wasted (FAO 2021)</p>
-        <p style="margin:0.5rem 0;font-size:1rem;">• Hostel plate-waste averages <strong>68 g/student/meal</strong> in India (ICAR 2020)</p>
-        <p style="margin:0.5rem 0;font-size:1rem;"><strong style="color:var(--warning);">Eliminating waste is the 3rd most effective climate solution after solar & wind.</strong></p>
-      </div>
-    </div>
-
-    <!-- Why Food Is Wasted -->
-    <section class="section">
-      <h2 class="section-title">🧠 Why Does This Happen? (Controlled Studies)</h2>
-      <div class="impact-section">
-        <div class="impact-card">
-          <div class="impact-icon">📏</div>
-          <h4>Over-cooking</h4>
-          <p>No attendance data → cook for full strength → surplus.</p>
-        </div>
-        <div class="impact-card">
-          <div class="impact-icon">🍽️</div>
-          <h4>Student Habits</h4>
-          <p>“I’ll taste a bit of everything” + eyes bigger than stomach.</p>
-        </div>
-        <div class="impact-card">
-          <div class="impact-icon">🧑‍🍳</div>
-          <h4>Menu Mismatch</h4>
-          <p>Repeated dishes → boredom → plates left half-eaten.</p>
-        </div>
-        <div class="impact-card">
-          <div class="impact-icon">❄️</div>
-          <h4>Storage Gaps</h4>
-          <p>Power cuts, no chillers → food spoils before serving.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Time-lapse Visualization Section -->
-    <section class="section">
-      <h2 class="section-title">📊 Live Hostel Wastage Tracker</h2>
-      <div class="hostel-cards" id="hostelCards">
-        <!-- Hostel cards will be dynamically generated here -->
-      </div>
-      <div class="chart-container">
+  <main>
+    <!-- LIVE STATS -->
+    <section id="data" class="section">
+      <h2 class="section__title">Live Hostel Wastage Tracker</h2>
+      <div class="grid" id="hostelCards"></div>
+      <div class="chart-box">
         <canvas id="wastageChart"></canvas>
       </div>
     </section>
 
-    <!-- Environmental Impact Section -->
-    <section class="section">
-      <h2 class="section-title pulse-guilt" style="font-size:2.2rem;">💔 How Our Daily Waste Destroys the Planet</h2>
-      <div style="text-align:center;margin-bottom:2rem;">
-        <p style="font-size:1.3rem;color:var(--warning);margin-bottom:1rem;">Every kg of wasted food = <strong style="font-size:1.5rem;">1 600 L water</strong> + <strong>3.3 kg CO₂-eq</strong></p>
-        <p style="font-size:1.3rem;color:var(--text-light);">While you throw food, someone else dies of thirst or hunger</p>
-      </div>
-      <div class="impact-section">
-        <div class="impact-card shake-animation">
-          <div class="impact-icon floating">💧</div>
-          <h4 style="color:var(--warning);">Water Footprint</h4>
-          <div class="counter" data-target="1600" style="color:var(--warning);">0</div>
-          <p style="color:var(--text-light);">L / kg wasted (global avg, FAO 2013)</p>
-        </div>
-        <div class="impact-card shake-animation">
-          <div class="impact-icon floating">💰</div>
-          <h4 style="color:var(--warning);">Economic Loss</h4>
-          <div class="counter" data-target="45" style="color:var(--warning);">0</div>
-          <p style="color:var(--text-light);">₹ / kg wasted (retail price, India 2023)</p>
-        </div>
-        <div class="impact-card shake-animation">
-          <div class="impact-icon floating">🌍</div>
-          <h4 style="color:var(--warning);">Climate Cost</h4>
-          <div class="counter" data-target="3.3" style="color:var(--warning);">0</div>
-          <p style="color:var(--text-light);">kg CO₂-eq / kg wasted (IPCC 2022)</p>
-        </div>
-        <div class="impact-card shake-animation">
-          <div class="impact-icon floating">⚡</div>
-          <h4 style="color:var(--warning);">Energy Loss</h4>
-          <div class="counter" data-target="4.2" style="color:var(--warning);">0</div>
-          <p style="color:var(--text-light);">kWh / kg wasted (life-cycle, LCA 2021)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Solutions (idea-based) -->
-    <section class="section">
-      <h2 class="section-title">🔬 Evidence-Based Solutions</h2>
-      <div class="impact-section">
-        <div class="impact-card">
+    <!-- SCIENCE CARDS -->
+    <section id="solutions" class="section">
+      <h2 class="section__title">Evidence-Based Solutions</h2>
+      <div class="grid">
+        <div class="glass-card">
           <div class="impact-icon">🥽</div>
           <h4>Pre-portioning</h4>
           <p>Meta-analysis (n = 15) shows 19 % waste reduction when students self-select portion size (J. Clean. Prod. 2021).</p>
         </div>
-        <div class="impact-card">
+        <div class="glass-card">
           <div class="impact-icon">🍛</div>
           <h4>Reversible Logistics</h4>
           <p>Edible surplus → bio-gas yields 1.3 MJ kg⁻¹ and 120 L CH₄ kg⁻¹ (Renew. Energy 2022).</p>
         </div>
-        <div class="impact-card">
+        <div class="glass-card">
           <div class="impact-icon">📱</div>
           <h4>Real-time Demand</h4>
           <p>App-based pre-order reduces cooking by 14 % and plate waste by 27 % (Comput. Electron. Agric. 2020).</p>
         </div>
-        <div class="impact-card">
+        <div class="glass-card">
           <div class="impact-icon">🧑‍🎓</div>
           <h4>Behaviour Nudges</h4>
           <p>Colour-contrast plates + feedback boards cut waste by 12 % without price change (Appetite 2019).</p>
@@ -643,38 +361,59 @@
       </div>
     </section>
 
-    <!-- Legal Penalties -->
-    <section class="section">
-      <h2 class="section-title">⚖️ Legal & Financial Risk</h2>
-      <div class="wastage-hero" style="background:var(--warning);color:#000;">
-        <h3>Food Safety & Standards Act 2006</h3>
-        <p>Wilful food wastage by institutions can attract <strong>penalty up to ₹10 lakh</strong> and licence suspension.</p>
-        <p style="margin-top:1rem;font-size:1rem;">Supreme Court directive (2021): “Large generators must donate edible surplus, else pay solid-waste fines.”</p>
+    <!-- IMPACT -->
+    <section id="impact" class="section">
+      <h2 class="section__title">Every Kilogram Counts</h2>
+      <div class="grid">
+        <div class="glass-card">
+          <div class="impact-icon">💧</div>
+          <h4>Water Footprint</h4>
+          <span class="counter" data-target="1600">0</span>
+          <p>L / kg wasted (global avg, FAO 2013)</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">💰</div>
+          <h4>Economic Loss</h4>
+          <span class="counter" data-target="45">0</span>
+          <p>₹ / kg wasted (retail price, India 2023)</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">🌍</div>
+          <h4>Climate Cost</h4>
+          <span class="counter" data-target="3.3">0</span>
+          <p>kg CO₂-eq / kg wasted (IPCC 2022)</p>
+        </div>
+        <div class="glass-card">
+          <div class="impact-icon">⚡</div>
+          <h4>Energy Loss</h4>
+          <span class="counter" data-target="4.2">0</span>
+          <p>kWh / kg wasted (life-cycle, LCA 2021)</p>
+        </div>
       </div>
     </section>
 
-    <!-- Interactive Calculator Section -->
+    <!-- CALCULATOR -->
     <section class="section">
-      <h2 class="section-title">🧮 Personal Impact Calculator</h2>
-      <div class="calculator-section">
-        <div class="calculator-controls">
-          <div class="form-group">
-            <label for="userHostel">Your Hostel</label>
-            <select id="userHostel">
-              <option value="Tejas">Tejas</option>
-              <option value="Ambaram">Ambaram</option>
-              <option value="Vasudha">Vasudha</option>
+      <h2 class="section__title">Personal Impact Calculator</h2>
+      <div class="glass-card">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+          <div>
+            <label style="font-weight: 600;">Your Hostel</label>
+            <select id="userHostel" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid var(--border); background: var(--glass); color: var(--text-lighter); margin-top: 0.5rem;">
+              <option>Tejas</option>
+              <option>Ambaram</option>
+              <option>Vasudha</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="skipMeals">Meals You Skip Per Week</label>
-            <input type="range" id="skipMeals" min="0" max="21" value="0">
-            <div class="range-value"><span id="skipValue">0</span> meals</div>
+          <div>
+            <label style="font-weight: 600;">Meals You Skip Per Week</label>
+            <input type="range" id="skipMeals" min="0" max="21" value="0" style="width: 100%; margin-top: 0.5rem;">
+            <div style="text-align: center; margin-top: 0.5rem; font-weight: 700; color: var(--cyan);"><span id="skipValue">0</span> meals</div>
           </div>
         </div>
-        <div class="result-section" id="calculationResult">
-          <h3>Your Annual Impact</h3>
-          <div class="result-grid">
+        <div id="calculationResult" style="display: none; margin-top: 2rem; padding: 1.5rem; background: rgba(255, 59, 48, 0.15); border-radius: 15px;">
+          <h4>Your Annual Impact</h4>
+          <div class="grid" style="margin-top: 1rem; text-align: center;">
             <div><strong>Water Saved:</strong> <span id="waterSaved">0</span> L</div>
             <div><strong>Money Saved:</strong> ₹<span id="moneySaved">0</span></div>
             <div><strong>CO₂ Reduced:</strong> <span id="co2Reduced">0</span> kg</div>
@@ -684,419 +423,211 @@
       </div>
     </section>
 
-    <!-- Printable Check-list -->
-    <section class="section">
-      <h2 class="section-title">✅ 10-Second Daily Check-list (Print & Stick Near Mess)</h2>
-      <div class="calculator-section" style="background:#fff9e5;border:2px dashed var(--warning);">
-        <ol style="margin-left:1.5rem;line-height:2;">
-          <li>Did I wash hands before entering? (Prevents food rejection)</li>
-          <li>Did I bring my own reusable bottle? (No disposable cups)</li>
-          <li>Did I take only one serving first? (Come back if still hungry)</li>
-          <li>Did I finish everything on my plate today?</li>
-          <li>Did I give feedback if dish was repeatedly left by many?</li>
-        </ol>
-        <button class="button secondary" onclick="window.print()">Print this card</button>
+    <!-- CTA -->
+    <section class="section" style="text-align: center;">
+      <h2 class="section__title">Take Action Today</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+        <button class="btn" onclick="showPledgeModal()">Take the Pledge</button>
+        <button class="btn" onclick="showShareModal()">Share Data</button>
+        <a href="index.html" class="btn">Start Planning</a>
       </div>
-    </section>
-
-    <!-- AI Assistant -->
-    <section class="section">
-      <h2 class="section-title">💬 Ask the AI Mess-Assistant</h2>
-      <div class="calculator-section">
-        <p style="margin-bottom:1rem;">Type your question (e.g. “How to store rice safely?”) and get an instant reply – no data leaves your device.</p>
-        <input id="aiInput" type="text" placeholder="Ask anything about food, waste, storage…" style="width:100%;padding:1rem;border:2px solid var(--border);border-radius:10px;">
-        <div id="aiReply" style="margin-top:1rem;padding:1rem;background:var(--page-bg);border-radius:10px;display:none;"></div>
-      </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="section">
-      <h2 class="section-title">🎯 Take Action Today</h2>
-      <div class="cta-section">
-        <div class="cta-buttons">
-          <button class="button pulse-guilt" onclick="showPledgeModal()">Take the Pledge</button>
-          <button class="button secondary" onclick="showShareModal()">Share Data</button>
-          <a href="index.html" class="button">Start Planning</a>
-        </div>
-        <p>Every meal planned is a meal saved. Every bite counts!</p>
-      </div>
+      <p style="color: var(--text-light);">Every meal planned is a meal saved. Every bite counts!</p>
     </section>
   </main>
 
-  <footer>Made with ❤️ by students, for students. | <a href="index.html" style="color:var(--primary)">Back to Food Wise</a></footer>
+  <!-- FOOTER -->
+  <footer>
+    Made with ❤️ by students, for students. | <a href="index.html" style="color: var(--cyan);">Back to Food Wise</a>
+  </footer>
 
-  <!-- Modals -->
-  <div id="pledgeModal" class="modal" role="dialog" aria-modal="true">
-    <div class="modal-content">
-      <button class="close" onclick="closeModal('pledgeModal')">&times;</button>
-      <h3 style="color:var(--primary);margin-bottom:1.5rem">🤝 Take the Zero-Waste Pledge</h3>
-      <div style="text-align:center">
-        <div style="font-size:3rem;margin-bottom:1rem">♻️</div>
-        <p style="margin-bottom:2rem;font-size:1.1rem">I commit to reducing food waste by planning my meals and only taking what I can finish.</p>
-        <button class="button" id="signPledge">Sign the Pledge</button>
-      </div>
+  <!-- MODALS -->
+  <div id="pledgeModal" class="modal">
+    <div class="modal__content">
+      <button class="modal__close" onclick="closeModal('pledgeModal')">&times;</button>
+      <h3 style="color: var(--accent); margin-bottom: 1rem;">🤝 Take the Zero-Waste Pledge</h3>
+      <p style="margin-bottom: 2rem;">I commit to reducing food waste by planning my meals and only taking what I can finish.</p>
+      <button class="btn" onclick="signPledge()">Sign the Pledge</button>
     </div>
   </div>
 
-  <div id="shareModal" class="modal" role="dialog" aria-modal="true">
-    <div class="modal-content">
-      <button class="close" onclick="closeModal('shareModal')">&times;</button>
-      <h3 style="color:var(--primary);margin-bottom:1.5rem">📱 Share the Data</h3>
-      <div style="text-align:center">
-        <p style="margin-bottom:2rem">Help spread peer-reviewed facts about food wastage in our college hostels</p>
-        <div class="cta-buttons">
-          <button class="button" onclick="shareWhatsApp()">WhatsApp</button>
-          <button class="button" onclick="shareTwitter()">Twitter</button>
-          <button class="button" onclick="copyLink()">Copy Link</button>
-        </div>
+  <div id="shareModal" class="modal">
+    <div class="modal__content">
+      <button class="modal__close" onclick="closeModal('shareModal')">&times;</button>
+      <h3 style="color: var(--accent); margin-bottom: 1rem;">📱 Share the Data</h3>
+      <p style="margin-bottom: 2rem;">Help spread peer-reviewed facts about food wastage in our college hostels</p>
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="btn" onclick="shareWhatsApp()">WhatsApp</button>
+        <button class="btn" onclick="shareTwitter()">Twitter</button>
+        <button class="btn" onclick="copyLink()">Copy Link</button>
       </div>
     </div>
   </div>
-
-  <style>
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .55);
-      backdrop-filter: blur(6px);
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-    .modal.active {
-      display: flex;
-    }
-    .modal-content {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 32px;
-      padding: 3.5rem 3rem 2.5rem;
-      width: 96vw;
-      max-width: 520px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, .25);
-      text-align: center;
-      position: relative;
-      animation: modalPop .4s cubic-bezier(.4, 0, .2, 1);
-    }
-    @keyframes modalPop {
-      from {
-        opacity: 0;
-        transform: scale(.85) translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-    }
-    .modal-content h3 {
-      color: var(--primary);
-      margin-bottom: 1.2rem;
-      font-size: 1.4rem;
-    }
-    .close {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.5rem;
-      font-size: 2.4rem;
-      color: var(--text-light);
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: color var(--transition);
-    }
-    .close:hover {
-      color: var(--accent);
-    }
-  </style>
 
   <script>
-    // Theme toggle
+    /* ---------- THEME ---------- */
     const themeBtn = document.getElementById('themeToggleBtn');
     themeBtn.onclick = () => {
-      document.body.classList.toggle('dark');
-      themeBtn.textContent = document.body.classList.contains('dark') ? '🌞' : '🌙';
-      localStorage.setItem('fw-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      document.body.classList.toggle('light');
+      themeBtn.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+      localStorage.setItem('fw-theme', document.body.classList.contains('light') ? 'light' : 'dark');
     };
-    if (localStorage.getItem('fw-theme') === 'dark') {
-      document.body.classList.add('dark');
+    if (localStorage.getItem('fw-theme') === 'light') {
+      document.body.classList.add('light');
       themeBtn.textContent = '🌞';
     }
 
-    // Modal functions
+    /* ---------- PARALLAX HERO ---------- */
+    window.addEventListener('scroll', () => {
+      const bg = document.querySelector('.hero__bg');
+      bg.style.transform = `translateY(${window.scrollY * 0.4}px)`;
+    });
+
+    /* ---------- SCROLL ---------- */
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ---------- MODAL ---------- */
     function openModal(id) {
       document.getElementById(id).classList.add('active');
     }
-
     function closeModal(id) {
       document.getElementById(id).classList.remove('active');
     }
-
-    // Click outside modal to close
     window.onclick = (e) => {
-      if (e.target.classList.contains('modal')) {
-        e.target.classList.remove('active');
-      }
+      if (e.target.classList.contains('modal')) e.target.classList.remove('active');
     };
 
-    // Generate hostel cards
+    /* ---------- HOSTEL CARDS ---------- */
     function generateHostelCards() {
       const hostels = ['Tejas', 'Ambaram', 'Vasudha'];
       const container = document.getElementById('hostelCards');
       container.innerHTML = '';
-
       hostels.forEach(hostel => {
-        const wastage = 20 + Math.random() * 20; // 20-40kg random
+        const wastage = (20 + Math.random() * 20).toFixed(1);
         const level = wastage > 30 ? 'high' : wastage > 25 ? 'medium' : 'low';
-
         const card = document.createElement('div');
-        card.className = 'hostel-wastage-card';
+        card.className = 'glass-card';
         card.innerHTML = `
-          <h4 style="color:var(--primary);margin-bottom:1rem">${hostel} Hostel</h4>
-          <div class="wastage-value">${wastage.toFixed(1)} kg</div>
-          <div style="color:var(--text-light);margin-bottom:1rem">Daily Average</div>
-          <div><span class="wastage-indicator ${level}"></span><span class="wastage-level">${level.charAt(0).toUpperCase() + level.slice(1)} Wastage</span></div>
-          <div class="meals-count" style="margin-top:1rem;font-size:0.9rem;color:var(--text-light)">≈ ${(wastage * 4).toFixed(0)} meals/day</div>
+          <h4>${hostel} Hostel</h4>
+          <div class="counter">${wastage} kg</div>
+          <p>Daily Average</p>
+          <div><span class="wastage-indicator ${level}"></span><span>${level.charAt(0).toUpperCase() + level.slice(1)} Wastage</span></div>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light)">≈ ${(wastage * 4).toFixed(0)} meals/day</p>
         `;
         container.appendChild(card);
       });
-
-      updateDailyMeals();
     }
 
-    // Update daily meals counter
-    function updateDailyMeals() {
-      const wastageElements = document.querySelectorAll('.hostel-wastage-card');
-      let totalWastage = 0;
-
-      wastageElements.forEach(card => {
-        const valueElement = card.querySelector('.wastage-value');
-        if (valueElement) {
-          const wastageText = valueElement.textContent;
-          totalWastage += parseFloat(wastageText);
-        }
-      });
-
-      const mealsCount = Math.floor(totalWastage * 4);
-      const dailyMealsElement = document.getElementById('dailyMeals');
-      if (dailyMealsElement) {
-        dailyMealsElement.textContent = mealsCount;
-      }
-    }
-
-    // Start animated counters
+    /* ---------- COUNTERS ---------- */
     function startCounters() {
       document.querySelectorAll('.counter').forEach(counter => {
         const target = parseFloat(counter.dataset.target);
-        const increment = target / 100;
+        const inc = target / 100;
         let current = 0;
-
-        const updateCounter = () => {
-          current += increment;
+        const update = () => {
+          current += inc;
           if (current < target) {
             counter.textContent = current.toFixed(1);
-            requestAnimationFrame(updateCounter);
+            requestAnimationFrame(update);
           } else {
             counter.textContent = target;
           }
         };
-
-        // Start animation when element is in viewport
-        const observer = new IntersectionObserver((entries) => {
+        const io = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              updateCounter();
-              observer.unobserve(entry.target);
+              update();
+              io.unobserve(entry.target);
             }
           });
         });
-
-        observer.observe(counter);
+        io.observe(counter);
       });
     }
 
-    // Initialize time-lapse chart
-    function initializeTimeLapseChart() {
+    /* ---------- CHART ---------- */
+    function drawChart() {
       const canvas = document.getElementById('wastageChart');
-      if (!canvas) return;
-
       const ctx = canvas.getContext('2d');
       canvas.width = canvas.offsetWidth;
       canvas.height = 250;
-
-      // Generate sample data for the last 7 days
       const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       const data = days.map(() => 20 + Math.random() * 20);
-
-      // Simple chart drawing
-      const maxValue = Math.max(...data);
-      const chartWidth = canvas.width - 60;
-      const chartHeight = canvas.height - 40;
-      const barWidth = chartWidth / days.length;
-
-      // Clear canvas
+      const max = Math.max(...data);
+      const barWidth = (canvas.width - 60) / days.length;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw bars
-      data.forEach((value, index) => {
-        const barHeight = (value / maxValue) * chartHeight;
-        const x = 30 + index * barWidth;
-        const y = canvas.height - 30 - barHeight;
-
-        // Gradient fill
-        const gradient = ctx.createLinearGradient(x, y + barHeight, x, y);
-        gradient.addColorStop(0, '#00A699');
-        gradient.addColorStop(1, '#008b7d');
-
-        ctx.fillStyle = gradient;
-        ctx.fillRect(x + barWidth * 0.2, y, barWidth * 0.6, barHeight);
-
-        // Labels
-        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-dark');
+      data.forEach((value, i) => {
+        const height = (value / max) * (canvas.height - 40);
+        const x = 30 + i * barWidth;
+        const y = canvas.height - 30 - height;
+        const grad = ctx.createLinearGradient(x, y + height, x, y);
+        grad.addColorStop(0, '#34b7f1');
+        grad.addColorStop(1, '#ff3b30');
+        ctx.fillStyle = grad;
+        ctx.fillRect(x + barWidth * 0.2, y, barWidth * 0.6, height);
+        ctx.fillStyle = '#f0f6fc';
         ctx.font = '12px Inter';
         ctx.textAlign = 'center';
-        ctx.fillText(days[index], x + barWidth / 2, canvas.height - 10);
+        ctx.fillText(days[i], x + barWidth / 2, canvas.height - 10);
         ctx.fillText(value.toFixed(1) + 'kg', x + barWidth / 2, y - 5);
       });
     }
 
-    // Setup calculator
+    /* ---------- CALCULATOR ---------- */
     function setupCalculator() {
-      const skipSlider = document.getElementById('skipMeals');
-      const skipValue = document.getElementById('skipValue');
-      const hostelSelect = document.getElementById('userHostel');
-
-      if (skipSlider) {
-        skipSlider.addEventListener('input', () => {
-          skipValue.textContent = skipSlider.value;
-          calculateImpact();
-        });
-      }
-
-      if (hostelSelect) {
-        hostelSelect.addEventListener('change', calculateImpact);
-      }
-
-      // Initial calculation
-      setTimeout(calculateImpact, 1000);
+      const slider = document.getElementById('skipMeals');
+      const val = document.getElementById('skipValue');
+      const res = document.getElementById('calculationResult');
+      slider.addEventListener('input', () => {
+        const v = parseInt(slider.value);
+        val.textContent = v;
+        if (v === 0) {
+          res.style.display = 'none';
+          return;
+        }
+        const water = v * 52 * 15;
+        const money = v * 52 * 45;
+        const co2 = v * 52 * 0.8;
+        const meals = v * 52;
+        document.getElementById('waterSaved').textContent = water.toLocaleString();
+        document.getElementById('moneySaved').textContent = money.toLocaleString();
+        document.getElementById('co2Reduced').textContent = co2.toFixed(1);
+        document.getElementById('mealsAvailable').textContent = meals.toLocaleString();
+        res.style.display = 'block';
+      });
     }
 
-    function calculateImpact() {
-      const skipMeals = parseInt(document.getElementById('skipMeals').value);
-      const resultDiv = document.getElementById('calculationResult');
-
-      if (skipMeals > 0) {
-        const waterSaved = skipMeals * 52 * 15; // 52 weeks, 15L per meal
-        const moneySaved = skipMeals * 52 * 45; // ₹45 per meal
-        const co2Reduced = skipMeals * 52 * 0.8; // 0.8kg CO2 per meal
-        const mealsAvailable = skipMeals * 52; // Meals that could feed others
-
-        document.getElementById('waterSaved').textContent = waterSaved.toLocaleString();
-        document.getElementById('moneySaved').textContent = moneySaved.toLocaleString();
-        document.getElementById('co2Reduced').textContent = co2Reduced.toLocaleString();
-        document.getElementById('mealsAvailable').textContent = mealsAvailable.toLocaleString();
-
-        resultDiv.classList.add('show');
-      } else {
-        resultDiv.classList.remove('show');
-      }
-    }
-
-    function showPledgeModal() {
-      openModal('pledgeModal');
-
-      // Handle pledge signing
-      document.getElementById('signPledge').onclick = () => {
-        const pledgeCount = parseInt(localStorage.getItem('pledgeCount') || '0') + 1;
-        localStorage.setItem('pledgeCount', pledgeCount);
-        localStorage.setItem('userPledged', 'true');
-        closeModal('pledgeModal');
-
-        // Show success message
-        setTimeout(() => {
-          alert('Thank you for taking the pledge! You are part of the solution now. 🌱');
-        }, 300);
-      };
-    }
-
-    function showShareModal() {
-      openModal('shareModal');
-    }
-
+    /* ---------- SHARE ---------- */
     function shareWhatsApp() {
       const text = encodeURIComponent('Did you know our college hostels waste 20-40kg of food daily? That\'s 80-160 meals! Let\'s take action together. 🌱');
       window.open(`https://wa.me/?text=${text}`, '_blank');
     }
-
     function shareTwitter() {
       const text = encodeURIComponent('College hostel food waste: 20-40kg daily = 80-160 meals wasted! Time to take action. 🍽️♻️');
       window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
     }
-
     function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        alert('Link copied to clipboard! Share it with your friends. 📱');
-      });
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied! 📋'));
     }
 
-    // AI assistant (very small on-device model – demo purposes)
-    const knowledge = {
-      store: "Keep cooked rice &lt; 5 °C; re-heat only once; discard if left &gt; 2 h at room temp.",
-      chapati: "Wrap in muslin & store in insulated box; consume within 8 h for best texture.",
-      dal: "Boil again for 2 min before re-use; add pinch of hing to delay souring.",
-      default: "Cover food, cool quickly, refrigerate & re-heat thoroughly. When in doubt, throw it out – but next time plan better 😉"
-    };
-    document.getElementById('aiInput').addEventListener('keydown', e => {
-      if (e.key !== 'Enter') return;
-      const q = e.target.value.toLowerCase();
-      const reply = Object.keys(knowledge).find(k => q.includes(k)) ? knowledge[Object.keys(knowledge).find(k => q.includes(k))] : knowledge.default;
-      const box = document.getElementById('aiReply');
-      box.textContent = reply;
-      box.style.display = 'block';
-    });
+    /* ---------- PLEDGE ---------- */
+    function signPledge() {
+      const count = parseInt(localStorage.getItem('pledgeCount') || '0') + 1;
+      localStorage.setItem('pledgeCount', count);
+      localStorage.setItem('userPledged', 'true');
+      closeModal('pledgeModal');
+      alert('Thank you for taking the pledge! You are part of the solution now. 🌱');
+    }
 
-    // Auto-update wastage data every 30 seconds to simulate real-time data
-    setInterval(() => {
-      document.querySelectorAll('.hostel-wastage-card').forEach(card => {
-        const valueElement = card.querySelector('.wastage-value');
-        if (valueElement) {
-          const currentValue = parseFloat(valueElement.textContent);
-          const newValue = 20 + Math.random() * 20;
-          valueElement.textContent = newValue.toFixed(1);
-
-          // Update level indicator
-          const level = newValue > 30 ? 'high' : newValue > 25 ? 'medium' : 'low';
-          const indicator = card.querySelector('.wastage-indicator');
-          if (indicator) {
-            indicator.className = `wastage-indicator ${level}`;
-            const levelText = card.querySelector('.wastage-level');
-            if (levelText) {
-              levelText.textContent = level.charAt(0).toUpperCase() + level.slice(1) + ' Wastage';
-            }
-          }
-
-          // Update meals count
-          const mealsElement = card.querySelector('.meals-count');
-          if (mealsElement) {
-            mealsElement.textContent = `≈ ${(newValue * 4).toFixed(0)} meals/day`;
-          }
-        }
-      });
-      updateDailyMeals();
-    }, 30000);
-
-    // Initialize everything when page loads
+    /* ---------- INITIALISE ---------- */
     window.addEventListener('DOMContentLoaded', () => {
       generateHostelCards();
       startCounters();
-      initializeTimeLapseChart();
+      drawChart();
       setupCalculator();
     });
-
-    // Redraw chart on window resize
-    window.addEventListener('resize', () => {
-      initializeTimeLapseChart();
-    });
+    window.addEventListener('resize', drawChart);
   </script>
 </body>
 </html>
